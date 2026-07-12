@@ -1,0 +1,1169 @@
+/* 
+========================================================================
+   EZHUMIN TECHNOLOGIES - Global Stylesheet
+   Theme: Premium, Modern, Cyber-Dark, Minimalist
+   Inspiration: Apple, Tesla, Anduril, Shield AI
+========================================================================
+*/
+
+/* ---------------------------------------------------------------------
+   1. DESIGN TOKENS (CSS Custom Properties / System Registers)
+   ---------------------------------------------------------------------
+   In Embedded C, this is equivalent to your 'config.h' file containing
+   #define configuration constants. These values are stored at the root 
+   level of the document and can be referenced throughout the code.
+--------------------------------------------------------------------- */
+:root {
+    /* Color Palette - Cyber Industrial Theme */
+    --color-bg-base: #050507;         /* Deep space obsidian (primary page background) */
+    --color-bg-surface: #101115;      /* Slate/carbon dark (card and section backgrounds) */
+    --color-bg-surface-elevated: #16181f; /* Lightened carbon for hovers and overlays */
+    
+    --color-text-primary: #f8fafc;     /* Soft white (high readability, low eye strain) */
+    --color-text-secondary: #94a3b8;   /* Cool muted gray (for descriptions and metadata) */
+    --color-text-muted: #64748b;       /* Darker slate (for disabled text or captions) */
+    
+    --color-accent: #00f0ff;           /* Cyber Cyan (energy, IoT, and action triggers) */
+    --color-accent-dim: rgba(0, 240, 255, 0.15); /* Semi-transparent cyan for glow states */
+    --color-accent-hover: #00c8d6;     /* Darker cyan for hover transition end-points */
+    
+    --color-border: #1e293b;           /* Slate grey borders (subtle grid alignments) */
+    --color-border-focus: #38bdf8;     /* Active register boundary (focus ring color) */
+
+    /* Typography Scale (Major Third - 1.25 Ratio) */
+    --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    
+    --font-size-xs: 0.75rem;           /* 12px - Metadata, labels */
+    --font-size-sm: 0.875rem;          /* 14px - Body secondary */
+    --font-size-base: 1rem;            /* 16px - Base body text */
+    --font-size-lg: 1.125rem;          /* 18px - Sub-headings, intro text */
+    --font-size-xl: 1.25rem;           /* 20px - Card headers */
+    --font-size-2xl: 1.5rem;           /* 24px - Section sub-headers */
+    --font-size-3xl: 2rem;             /* 32px - Section headers */
+    --font-size-4xl: 3rem;             /* 48px - Primary page headlines */
+    --font-size-5xl: 4.5rem;           /* 72px - Hero section displays */
+
+    /* Font Weights */
+    --font-weight-regular: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+
+    /* Spacing System (8px / 0.5rem base) */
+    --spacing-1: 0.25rem;              /* 4px */
+    --spacing-2: 0.5rem;               /* 8px */
+    --spacing-3: 0.75rem;              /* 12px */
+    --spacing-4: 1rem;                 /* 16px */
+    --spacing-5: 1.5rem;               /* 24px */
+    --spacing-6: 2rem;                 /* 32px */
+    --spacing-8: 3rem;                 /* 48px */
+    --spacing-10: 4rem;                /* 64px */
+    --spacing-12: 6rem;                /* 96px */
+    --spacing-16: 8rem;                /* 128px */
+
+    /* Grid & Structural Layout Constraints */
+    --container-max-width: 1200px;     /* Maximum width of main content grid wrapper */
+    --border-radius-sm: 4px;           /* Subtle corner rounding for small items (badges) */
+    --border-radius-md: 8px;           /* Standard corner rounding (cards, buttons) */
+    --border-radius-lg: 16px;          /* Premium panel corner rounding */
+    
+    /* Animation Registers (Duration and Curves) */
+    --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-normal: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* Hardware Accelerations and Effects */
+    --shadow-glow: 0 0 20px var(--color-accent-dim);
+    --glass-blur: blur(12px);
+    --glass-bg: rgba(10, 11, 15, 0.75);
+    --glass-border: rgba(255, 255, 255, 0.05);
+}
+
+/* ---------------------------------------------------------------------
+   2. MODERN CSS RESET (Hardware Flush / Clearing Memory)
+   ---------------------------------------------------------------------
+   Like clearing RAM registers on initialization (e.g., memset).
+   Ensures all browsers start from the exact same layout baseline.
+--------------------------------------------------------------------- */
+*, *::before, *::after {
+    box-sizing: border-box;            /* Include border/padding in width calculations */
+    margin: 0;                         /* Flush default margin */
+    padding: 0;                        /* Flush default padding */
+}
+
+/* Ensure smooth scrolling when anchor tags are triggered */
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;                   /* Base system font size */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    background-color: var(--color-bg-base);
+    color: var(--color-text-primary);
+    font-family: var(--font-sans);
+    line-height: 1.6;                  /* Optimal baseline text spacing */
+    overflow-x: hidden;                /* Prevent accidental horizontal scrolling */
+}
+
+/* Remove default list styling (clearing bullet configurations) */
+ul, ol {
+    list-style: none;
+}
+
+/* Make images fluid and prevent them from blowing out of layouts */
+img, video {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+/* Form and Action elements must inherit typography variables */
+input, button, textarea, select {
+    font: inherit;
+    color: inherit;
+    background: transparent;
+    border: none;
+}
+
+/* Anchor reset (no default underlines, inherit color) */
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Make buttons act like clickable devices */
+button {
+    cursor: pointer;
+}
+
+/* ---------------------------------------------------------------------
+   3. TYPOGRAPHY SYSTEM
+   --------------------------------------------------------------------- */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: var(--font-weight-bold);
+    line-height: 1.2;
+    letter-spacing: -0.02em;           /* Tighter letter spacing for premium headlines */
+    color: var(--color-text-primary);
+}
+
+h1 { font-size: var(--font-size-4xl); }
+h2 { font-size: var(--font-size-3xl); }
+h3 { font-size: var(--font-size-xl); }
+
+/* Typography styling helpers */
+.section-subtitle {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    letter-spacing: 0.15em;            /* Spaced monospaced text for a high-tech radar label */
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: var(--spacing-3);
+}
+
+/* ---------------------------------------------------------------------
+   4. LAYOUT CONTROLLERS (Grid, Flex, and Containers)
+   --------------------------------------------------------------------- */
+.container {
+    width: 100%;
+    max-width: var(--container-max-width);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--spacing-6);
+    padding-right: var(--spacing-6);
+}
+
+/* Centered flex wrapper */
+.flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Flexible grid system wrapper */
+.grid {
+    display: grid;
+    gap: var(--spacing-6);
+}
+
+/* 2-Column Grid (Desktop Default) */
+.grid-2 {
+    grid-template-columns: 1fr;
+}
+
+/* 3-Column Grid (Desktop Default) */
+.grid-3 {
+    grid-template-columns: 1fr;
+}
+
+/* 4-Column Grid (Desktop Default) */
+.grid-4 {
+    grid-template-columns: 1fr;
+}
+
+/* Responsive grid overrides (Media Queries / Hardware Limits) */
+@media (min-width: 768px) {
+    .grid-2 { grid-template-columns: repeat(2, 1fr); }
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .grid-4 { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 1024px) {
+    .grid-4 { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* ---------------------------------------------------------------------
+   5. BUTTON & COMPONENT BASES
+   --------------------------------------------------------------------- */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-3) var(--spacing-6);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    border-radius: var(--border-radius-md);
+    transition: all var(--transition-fast);
+    text-align: center;
+}
+
+.btn-primary {
+    background-color: var(--color-accent);
+    color: var(--color-bg-base);
+    border: 1px solid var(--color-accent);
+}
+
+.btn-primary:hover {
+    background-color: var(--color-accent-hover);
+    border-color: var(--color-accent-hover);
+    box-shadow: var(--shadow-glow);   /* Create a radiant energy glow on hover */
+    transform: translateY(-2px);       /* Subtle lift simulation */
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: var(--color-text-primary);
+    border: 1px solid var(--color-border);
+}
+
+.btn-secondary:hover {
+    border-color: var(--color-text-primary);
+    background-color: rgba(255, 255, 255, 0.05);
+    transform: translateY(-2px);
+}
+
+.btn-large {
+    padding: var(--spacing-4) var(--spacing-8);
+    font-size: var(--font-size-base);
+}
+
+/* ---------------------------------------------------------------------
+   6. GLOBAL STRUCTURAL BLOCKS (Header, Sections, Footer)
+   --------------------------------------------------------------------- */
+
+/* Sticky Header - Starts transparent, transitions to blur-dark on scroll */
+.site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;                     /* Priority stack level */
+    background: transparent;
+    border-bottom: 1px solid transparent;
+    transition: background var(--transition-normal), border-color var(--transition-normal), box-shadow var(--transition-normal), padding var(--transition-normal);
+    padding: var(--spacing-2) 0;       /* Start slightly taller */
+}
+
+/* Scrolled state class - triggered by JS scroll monitor */
+.site-header.scrolled {
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur); /* Safari engine compatibility */
+    border-bottom: 1px solid var(--glass-border);
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+    padding: 0;                        /* Squeeze height slightly on scroll for premium sleek feel */
+}
+
+.header-container {
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    padding: var(--spacing-4) var(--spacing-6);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+    z-index: 1002;                     /* Ensure logo stays above mobile drawer */
+}
+
+.logo-text {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: 0.1em;
+    color: var(--color-text-primary);
+}
+
+.logo-subtext {
+    font-size: 0.65rem;
+    font-weight: var(--font-weight-bold);
+    letter-spacing: 0.25em;
+    color: var(--color-text-muted);
+    margin-top: 2px;
+}
+
+/* Mobile Menu Toggle Button (Hamburger) */
+.mobile-nav-toggle {
+    display: none;                     /* Hidden on Desktop */
+    flex-direction: column;
+    justify-content: space-between;
+    width: 24px;
+    height: 18px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 1002;                     /* Keep above mobile menu drawer overlay */
+    padding: 0;
+}
+
+.hamburger-bar {
+    width: 100%;
+    height: 2px;
+    background-color: var(--color-text-primary);
+    border-radius: 2px;
+    transition: transform var(--transition-normal), opacity var(--transition-normal), background-color var(--transition-normal);
+}
+
+/* Active hamburger animations to form an 'X' */
+.mobile-nav-toggle.is-active .hamburger-bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+    background-color: var(--color-accent);
+}
+
+.mobile-nav-toggle.is-active .hamburger-bar:nth-child(2) {
+    opacity: 0;
+}
+
+.mobile-nav-toggle.is-active .hamburger-bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+    background-color: var(--color-accent);
+}
+
+/* Main Navigation Container */
+.main-navigation ul {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-8);
+}
+
+.main-navigation a {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-secondary);
+    transition: color var(--transition-fast);
+    position: relative;
+    padding: var(--spacing-2) 0;
+}
+
+/* Sliding underline animation effect */
+.main-navigation a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: var(--color-accent);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform var(--transition-fast);
+}
+
+.main-navigation a:hover {
+    color: var(--color-accent);
+}
+
+.main-navigation a:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+/* Responsive Styles for Mobile Nav Drawer (< 768px) */
+@media (max-width: 767px) {
+    .mobile-nav-toggle {
+        display: flex;                 /* Reveal hamburger toggle */
+    }
+
+    .main-navigation {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: var(--color-bg-base);
+        border-left: 1px solid var(--color-border);
+        z-index: 1001;                 /* Under hamburger button, but above content */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transform: translateX(100%);   /* Slide completely off-screen to the right */
+        visibility: hidden;            /* Accessibility focus trap fix */
+        transition: transform var(--transition-normal), visibility var(--transition-normal);
+        padding: var(--spacing-16) var(--spacing-6);
+    }
+
+    /* Stack items vertically inside drawer */
+    .main-navigation ul {
+        flex-direction: column;
+        align-items: center;
+        gap: var(--spacing-8);
+        width: 100%;
+    }
+
+    .main-navigation a {
+        font-size: var(--font-size-xl);
+        font-weight: var(--font-weight-semibold);
+        color: var(--color-text-primary);
+        width: 100%;
+        text-align: center;
+        padding: var(--spacing-4);
+    }
+
+    .main-navigation a::after {
+        display: none;                 /* Remove sliding lines on mobile view */
+    }
+
+    /* Slide in active mobile menu */
+    .main-navigation.is-active {
+        transform: translateX(0);      /* Shift into viewport */
+        visibility: visible;
+    }
+}
+
+/* Generic Section Spacing */
+section {
+    padding-top: var(--spacing-16);
+    padding-bottom: var(--spacing-16);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.section-container {
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    padding-left: var(--spacing-6);
+    padding-right: var(--spacing-6);
+}
+
+/* Individual Content Blocks Layout styles */
+/* 1. Hero Section Layout & Overlay Systems */
+.hero-section {
+    min-height: 100vh;                 /* Take full screen height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 80px;                 /* Clear space for fixed header */
+    position: relative;
+    overflow: hidden;
+}
+
+/* Background canvas container */
+.hero-bg-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;                       /* Send background behind copy */
+}
+
+/* Procedural tech gradient */
+.hero-media-placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #050507 0%, #0d0f15 50%, #050507 100%);
+}
+
+/* Sci-Fi Grid Overlay (Pure CSS, hardware-accelerated) */
+.hero-grid-lines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        linear-gradient(rgba(0, 240, 255, 0.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 240, 255, 0.015) 1px, transparent 1px);
+    background-size: 60px 60px;
+    background-position: center top;
+    opacity: 0.8;
+}
+
+/* Radial Glow simulating an energy core */
+.hero-overlay-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 50% 45%, rgba(0, 240, 255, 0.08) 0%, transparent 60%);
+}
+
+/* Bottom Dark Fade (Transitions seamlessly to next section) */
+.hero-overlay-dark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent 40%, var(--color-bg-base) 100%);
+}
+
+/* Hero Content alignment wrapper */
+.hero-content {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+    padding: var(--spacing-6);
+    z-index: 1;                        /* Keep above background canvas */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.hero-pretitle {
+    font-family: var(--font-mono);
+    color: var(--color-accent);
+    font-size: var(--font-size-sm);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    margin-bottom: var(--spacing-4);
+    animation: fade-slide-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Advanced Title Stack */
+.hero-title {
+    margin-bottom: var(--spacing-6);
+    line-height: 1.1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2);
+}
+
+.company-brand-name {
+    font-size: clamp(1.5rem, 5vw, var(--font-size-2xl));
+    font-weight: var(--font-weight-medium);
+    letter-spacing: 0.1em;
+    color: var(--color-text-secondary);
+    animation: fade-slide-up 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.company-tagline {
+    font-size: clamp(2.5rem, 8vw, var(--font-size-5xl));
+    font-weight: var(--font-weight-bold);
+    letter-spacing: -0.02em;
+    background: linear-gradient(180deg, var(--color-text-primary) 30%, #a1a1aa 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: fade-slide-up 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.hero-description {
+    font-size: var(--font-size-lg);
+    color: var(--color-text-secondary);
+    max-width: 680px;
+    margin: 0 auto var(--spacing-8) auto;
+    line-height: 1.6;
+    animation: fade-slide-up 1.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--spacing-4);
+    animation: fade-slide-up 1.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Animated Scroll Indicator */
+.hero-scroll-indicator {
+    position: absolute;
+    bottom: var(--spacing-8);
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    animation: fade-in 2s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.mouse-frame {
+    display: block;
+    width: 26px;
+    height: 42px;
+    border: 2px solid var(--color-text-muted);
+    border-radius: 13px;
+    position: relative;
+    opacity: 0.6;
+    transition: opacity var(--transition-fast), border-color var(--transition-fast);
+}
+
+.hero-scroll-indicator:hover .mouse-frame {
+    opacity: 1;
+    border-color: var(--color-accent);
+}
+
+.mouse-wheel {
+    display: block;
+    width: 4px;
+    height: 8px;
+    background-color: var(--color-accent);
+    border-radius: 2px;
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: scroll-wheel-slide 2s infinite ease-in-out;
+}
+
+/* =========================================================================
+   8. PREMIUM ANIMATION SYSTEMS (Apple & Tesla Style)
+   ========================================================================= */
+
+/* Reveal on Scroll Baseline */
+.reveal {
+    opacity: 0;
+    transform: translateY(35px);
+    transition: opacity 1200ms cubic-bezier(0.16, 1, 0.3, 1), 
+                transform 1200ms cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform, opacity;   /* Registers element rendering boundary in GPU memory */
+}
+
+/* Active Class (Invoked by IntersectionObserver ISR) */
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Dynamic Grid Card Staggering (Sequential delay timings) */
+.services-grid > article:nth-child(1),
+.products-grid > article:nth-child(1),
+.tech-grid > div:nth-child(1) { transition-delay: 0ms; }
+
+.services-grid > article:nth-child(2),
+.products-grid > article:nth-child(2),
+.tech-grid > div:nth-child(2) { transition-delay: 100ms; }
+
+.services-grid > article:nth-child(3),
+.products-grid > article:nth-child(3),
+.tech-grid > div:nth-child(3) { transition-delay: 200ms; }
+
+.services-grid > article:nth-child(4),
+.products-grid > article:nth-child(4) { transition-delay: 300ms; }
+
+/* Parallax GPU constraint rules */
+.hero-bg-container {
+    will-change: transform;
+    transition: transform 150ms cubic-bezier(0.25, 0.8, 0.25, 1); /* Smooths parallax scroll noise */
+}
+
+/* Keyframe Animations (GPU accelerated transitions) */
+@keyframes scroll-wheel-slide {
+    0% {
+        transform: translate(-50%, 0);
+        opacity: 1;
+    }
+    40% {
+        transform: translate(-50%, 10px);
+        opacity: 0;
+    }
+    100% {
+        transform: translate(-50%, 0);
+        opacity: 0;
+    }
+}
+
+@keyframes fade-slide-up {
+    0% {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* About Layout */
+.about-grid {
+    margin-top: var(--spacing-8);
+}
+
+.about-text p {
+    font-size: var(--font-size-lg);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--spacing-4);
+    max-width: 800px;
+}
+
+/* Mission & Vision Styling */
+.mission-section, .vision-section {
+    background-color: var(--color-bg-surface);
+}
+
+.mission-statement, .vision-statement {
+    font-size: clamp(1.25rem, 4vw, var(--font-size-2xl));
+    font-weight: var(--font-weight-medium);
+    line-height: 1.4;
+    color: var(--color-text-primary);
+    border-left: 2px solid var(--color-accent);
+    padding-left: var(--spacing-6);
+    margin-top: var(--spacing-6);
+}
+
+/* Services Design - Grid elements */
+.services-grid, .products-grid {
+    display: grid;
+    gap: var(--spacing-6);
+    margin-top: var(--spacing-8);
+}
+
+.service-card {
+    background-color: var(--color-bg-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-6);
+    transition: all var(--transition-normal);
+}
+
+.service-card:hover {
+    border-color: var(--color-accent);
+    background-color: var(--color-bg-surface-elevated);
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px -15px rgba(0, 240, 255, 0.2);
+}
+
+.service-icon {
+    font-size: 2rem;
+    margin-bottom: var(--spacing-4);
+}
+
+.service-card h3, .product-card h3 {
+    margin-bottom: var(--spacing-3);
+}
+
+.service-card p, .product-card p {
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+}
+
+/* Products styling */
+.product-card {
+    background-color: var(--color-bg-base);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-8) var(--spacing-6);
+    position: relative;
+    overflow: hidden;
+    transition: all var(--transition-normal);
+}
+
+.product-card:hover {
+    border-color: var(--color-accent);
+    transform: translateY(-4px);
+}
+
+.product-badge {
+    position: absolute;
+    top: var(--spacing-4);
+    right: var(--spacing-4);
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: var(--font-weight-bold);
+    background-color: var(--color-border);
+    color: var(--color-accent);
+    padding: var(--spacing-1) var(--spacing-3);
+    border-radius: var(--border-radius-sm);
+    text-transform: uppercase;
+}
+
+/* Technology Stack Grid */
+.tech-grid {
+    display: grid;
+    gap: var(--spacing-6);
+    margin-top: var(--spacing-8);
+}
+
+.tech-category {
+    background-color: var(--color-bg-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-md);
+    padding: var(--spacing-6);
+}
+
+.tech-category h3 {
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: var(--spacing-3);
+    margin-bottom: var(--spacing-4);
+    color: var(--color-accent);
+    font-size: var(--font-size-base);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.tech-category ul li {
+    position: relative;
+    padding-left: var(--spacing-4);
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+    margin-bottom: var(--spacing-2);
+}
+
+.tech-category ul li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--color-accent);
+}
+
+/* Why Choose Us / Advantage section */
+.benefits-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-6);
+    margin-top: var(--spacing-8);
+}
+
+.benefit-item {
+    border-left: 2px solid var(--color-border);
+    padding-left: var(--spacing-5);
+    transition: border-color var(--transition-fast);
+}
+
+.benefit-item:hover {
+    border-color: var(--color-accent);
+}
+
+.benefit-item h3 {
+    margin-bottom: var(--spacing-2);
+    font-size: var(--font-size-lg);
+}
+
+.benefit-item p {
+    color: var(--color-text-secondary);
+    max-width: 800px;
+}
+
+/* Call to Action Section (CTA) */
+.cta-section {
+    background-color: var(--color-bg-surface);
+    text-align: center;
+}
+
+.cta-container {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: var(--spacing-8) var(--spacing-6);
+}
+
+.cta-container h2 {
+    font-size: var(--font-size-3xl);
+    margin-bottom: var(--spacing-4);
+}
+
+.cta-container p {
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-lg);
+    margin-bottom: var(--spacing-6);
+}
+
+/* Premium Footer Styling */
+.site-footer {
+    background-color: #030305;
+    padding: var(--spacing-16) 0 var(--spacing-8) 0;
+    border-top: 1px solid var(--color-border);
+}
+
+.footer-container {
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    padding: 0 var(--spacing-6);
+    display: grid;
+    grid-template-columns: 1fr;         /* Mobile-first: single stacked column */
+    gap: var(--spacing-10);
+}
+
+/* Brand Profile Styling */
+.footer-brand-col {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-4);
+}
+
+.footer-desc {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    max-width: 320px;
+}
+
+.footer-social {
+    display: flex;
+    gap: var(--spacing-4);
+    margin-top: var(--spacing-2);
+}
+
+.footer-social a {
+    color: var(--color-text-secondary);
+    transition: color var(--transition-fast), transform var(--transition-fast);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.footer-social a:hover {
+    color: var(--color-accent);
+    transform: translateY(-2px);       /* Hover lift simulation */
+}
+
+/* Column Header Guidelines */
+.footer-column h3 {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    color: var(--color-text-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: var(--spacing-4);
+    position: relative;
+    padding-bottom: var(--spacing-2);
+}
+
+/* Subtle line indicator under headers (clean tech design) */
+.footer-column h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 20px;
+    height: 1px;
+    background-color: var(--color-accent);
+}
+
+.footer-column ul {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2);
+}
+
+.footer-column ul a {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    transition: color var(--transition-fast), padding-left var(--transition-fast);
+}
+
+.footer-column ul a:hover {
+    color: var(--color-accent);
+    padding-left: var(--spacing-1);     /* Shift left-to-right micro-interaction */
+}
+
+/* Newsletter Input Components styling */
+.footer-newsletter-col {
+    max-width: 350px;
+}
+
+.newsletter-desc {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--spacing-4);
+    line-height: 1.5;
+}
+
+.footer-newsletter-form {
+    width: 100%;
+}
+
+.newsletter-input-wrapper {
+    display: flex;
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-md);
+    background-color: var(--color-bg-base);
+    overflow: hidden;
+    transition: border-color var(--transition-fast);
+}
+
+.newsletter-input-wrapper:focus-within {
+    border-color: var(--color-accent);
+    box-shadow: var(--shadow-glow);   /* Glow on active input focus */
+}
+
+.newsletter-input {
+    flex-grow: 1;
+    padding: var(--spacing-3) var(--spacing-4);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-primary);
+}
+
+.newsletter-input::placeholder {
+    color: var(--color-text-muted);
+}
+
+.newsletter-btn {
+    padding: var(--spacing-3) var(--spacing-4);
+    border-radius: 0;                  /* Match flat integration width */
+    background-color: var(--color-bg-surface-elevated);
+    border: none;
+    color: var(--color-text-primary);
+    transition: background-color var(--transition-fast), color var(--transition-fast);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.newsletter-btn:hover {
+    background-color: var(--color-accent);
+    color: var(--color-bg-base);
+}
+
+/* Footer Bottom metadata */
+.footer-bottom {
+    margin-top: var(--spacing-12);
+    padding-top: var(--spacing-6);
+    border-top: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.footer-bottom-container {
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    padding: 0 var(--spacing-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-4);
+    font-size: var(--font-size-xs);
+    color: var(--color-text-muted);
+}
+
+.footer-meta-links {
+    display: flex;
+    gap: var(--spacing-4);
+    flex-wrap: wrap;
+}
+
+.footer-meta-links a {
+    color: var(--color-text-secondary);
+    transition: color var(--transition-fast);
+}
+
+.footer-meta-links a:hover {
+    color: var(--color-accent);
+}
+
+.footer-tagline {
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-text-muted);
+}
+
+/* ---------------------------------------------------------------------
+   7. RESPONSIVE MEDIA QUERIES (Mobile, Tablet, Laptop, Desktop, 4K)
+   --------------------------------------------------------------------- */
+
+/* =========================================================================
+   A. TABLET BREAKPOINT (min-width: 768px)
+   ========================================================================= */
+@media (min-width: 768px) {
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .products-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns fit tablet width better */
+    }
+    
+    .tech-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .footer-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--spacing-8);
+    }
+    
+    .footer-newsletter-col {
+        grid-column: span 2;              /* Newsletter spans full width on tablets */
+        max-width: none;
+    }
+    
+    .footer-bottom-container {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+
+/* =========================================================================
+   B. LAPTOP BREAKPOINT (min-width: 1024px)
+   ========================================================================= */
+@media (min-width: 1024px) {
+    :root {
+        --container-max-width: 1140px;
+    }
+
+    .tech-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .products-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .footer-container {
+        grid-template-columns: 2.5fr 1fr 1fr 1fr 2.5fr; /* Fully expanded 5-col grid */
+    }
+
+    .footer-newsletter-col {
+        grid-column: auto;
+        max-width: 350px;
+    }
+}
+
+/* =========================================================================
+   C. DESKTOP BREAKPOINT (min-width: 1440px)
+   ========================================================================= */
+@media (min-width: 1440px) {
+    :root {
+        --container-max-width: 1360px;
+        --spacing-16: 10rem;              /* Add breathing room between massive sections */
+    }
+
+    .services-grid {
+        grid-template-columns: repeat(4, 1fr); /* Spread services horizontally across screen */
+    }
+}
+
+/* =========================================================================
+   D. 4K ULTRA-WIDE BREAKPOINT (min-width: 2560px)
+   ========================================================================= */
+@media (min-width: 2560px) {
+    :root {
+        --container-max-width: 1800px;
+    }
+    
+    html {
+        font-size: 22px;                   /* Global scale register adjustment (rem bases up by 37.5%) */
+    }
+}
