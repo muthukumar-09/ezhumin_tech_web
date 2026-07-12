@@ -81,7 +81,12 @@ document.addEventListener('DOMContentLoaded', () => {
         '.tech-category, ' +
         '.benefit-item, ' +
         '.mission-statement, ' +
-        '.vision-statement'
+        '.vision-statement, ' +
+        '.value-item, ' +
+        '.specs-table tr, ' +
+        '.platform-card, ' +
+        '.flowchart-step, ' +
+        '.timeline-item'
     );
 
     // Initialize their default off-screen variables and register them to the listener
@@ -113,4 +118,33 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+
+    // =========================================================================
+    // 5. PRODUCT SPECS CATEGORY TABS CONTROLLER
+    // =========================================================================
+    const tabButtons = document.querySelectorAll('.product-tabs .tab-btn');
+    const tabPanes = document.querySelectorAll('.tab-content .tab-pane');
+
+    tabButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const targetId = btn.getAttribute('data-target');
+
+            // Deactivate all tab buttons & panes
+            tabButtons.forEach(b => {
+                b.classList.remove('active');
+                b.setAttribute('aria-selected', 'false');
+            });
+            tabPanes.forEach(pane => {
+                pane.classList.remove('active');
+            });
+
+            // Activate current tab button & target pane
+            btn.classList.add('active');
+            btn.setAttribute('aria-selected', 'true');
+            const targetPane = document.getElementById(targetId);
+            if (targetPane) {
+                targetPane.classList.add('active');
+            }
+        });
+    });
 });

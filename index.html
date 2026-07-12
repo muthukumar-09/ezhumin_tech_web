@@ -41,8 +41,9 @@
                     <li><a href="#about">About</a></li>
                     <li><a href="#services">Services</a></li>
                     <li><a href="#products">Products</a></li>
-                    <li><a href="#technology">Technology</a></li>
-                    <li><a href="#contact">Careers</a></li>
+                    <li><a href="#architecture">Architecture</a></li>
+                    <li><a href="#technology">Stack</a></li>
+                    <li><a href="#roadmap">Roadmap</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </nav>
@@ -106,25 +107,38 @@
             </div>
         </section>
 
-        <!-- 3. Mission Section -->
-        <section id="mission" class="mission-section">
+        <!-- 3. Mission, Vision, and Core Values Section -->
+        <section id="philosophy" class="philosophy-section">
             <div class="section-container">
-                <p class="section-subtitle">Our Purpose</p>
-                <h2>The Mission</h2>
-                <blockquote class="mission-statement">
-                    "To engineer robust, energy-efficient, and intelligent electronic systems that accelerate the global transition to automation, clean energy, and decentralized computing."
-                </blockquote>
-            </div>
-        </section>
+                <div class="philosophy-grid">
+                    <div class="philosophy-card">
+                        <p class="section-subtitle">Our Purpose</p>
+                        <h2>The Mission</h2>
+                        <blockquote class="mission-statement">
+                            "To engineer, manufacture, and scale high-performance multi-source renewable microgrids that deliver resilient, continuous, and economically optimized power to all sectors."
+                        </blockquote>
+                    </div>
+                    <div class="philosophy-card">
+                        <p class="section-subtitle">Our Horizon</p>
+                        <h2>The Vision</h2>
+                        <blockquote class="vision-statement">
+                            "To architect the foundational framework for decentralized global energy self-sufficiency, displacing conventional baseload assets with smart, non-intermittent hybrid technologies."
+                        </blockquote>
+                    </div>
+                </div>
 
-        <!-- 4. Vision Section -->
-        <section id="vision" class="vision-section">
-            <div class="section-container">
-                <p class="section-subtitle">Our Horizon</p>
-                <h2>The Vision</h2>
-                <blockquote class="vision-statement">
-                    "To become the world's most trusted partner for low-power edge AI and safety-critical industrial firmware, setting the benchmark for hardware-software co-design."
-                </blockquote>
+                <div class="values-grid">
+                    <div class="value-item">
+                        <div class="value-icon">🛡️</div>
+                        <h3>Core Values</h3>
+                        <p>Uncompromising engineering integrity, structural longevity, grid-interactive resilience, and a steadfast dedication to absolute technological sustainability.</p>
+                    </div>
+                    <div class="value-item">
+                        <div class="value-icon">🇮🇳</div>
+                        <h3>Made in India, For the World</h3>
+                        <p>Proudly researched, developed, and precision manufactured within India. Our architecture conforms strictly to international IEC and IEEE compliance baselines, serving as a future-proof global brand.</p>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -165,25 +179,507 @@
         <section id="products" class="products-section">
             <div class="section-container">
                 <p class="section-subtitle">Solutions</p>
-                <h2>Our Proprietary Systems</h2>
-                <div class="products-grid">
-                    <article class="product-card">
-                        <span class="product-badge">Energy</span>
-                        <h3>EZH-GridController V1</h3>
-                        <p>An intelligent microgrid controller that balances solar PV yield, localized storage systems, and building loads dynamically at the microsecond level.</p>
-                    </article>
+                <h2>MINOVA Smart Hybrid Systems</h2>
+                <p class="section-intro">The MINOVA ecosystem encompasses a comprehensive portfolio designed across multiple power tiers to satisfy specific spatial, operational, and financial parameters.</p>
+                
+                <!-- Category Tabs Selector -->
+                <div class="product-tabs" role="tablist" aria-label="MINOVA Product Categories">
+                    <button class="tab-btn active" role="tab" aria-selected="true" aria-controls="pane-lighting" id="tab-lighting" data-target="pane-lighting">Municipal (L-Series)</button>
+                    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="pane-residential" id="tab-residential" data-target="pane-residential">Residential (H-Series)</button>
+                    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="pane-agri-comm" id="tab-agri-comm" data-target="pane-agri-comm">Agri & Commercial</button>
+                    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="pane-industrial" id="tab-industrial" data-target="pane-industrial">Industrial (I-Series)</button>
+                    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="pane-battery" id="tab-battery" data-target="pane-battery">Battery Storage (B-Series)</button>
+                    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="pane-platform" id="tab-platform" data-target="pane-platform">Smart Platform</button>
+                </div>
+                
+                <!-- Tab Panes Container -->
+                <div class="tab-content">
+                    <!-- Pane 1: Municipal Lighting -->
+                    <div class="tab-pane active" id="pane-lighting" role="tabpanel" aria-labelledby="tab-lighting">
+                        <p class="pane-description">Completely autonomous, rugged municipal infrastructure illumination platforms. Combining localized vertical aerodynamic micro-turbines and high-efficiency bifacial monocrystalline solar cells to guarantee operational performance across adverse climatic conditions.</p>
+                        <div class="table-responsive">
+                            <table class="specs-table">
+                                <thead>
+                                    <tr>
+                                        <th>Model</th>
+                                        <th>Lumens / Power</th>
+                                        <th>Battery Capacity</th>
+                                        <th>Application Vector</th>
+                                        <th>Distinctive Engineering Features</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="model-name">MINOVA L50</td>
+                                        <td>6,500 lm / 50W</td>
+                                        <td>400 Wh LiFePO4</td>
+                                        <td>Urban Footpaths / Parks</td>
+                                        <td>Integrated passive PIR motion profiling, ultra-compact profile</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="model-name">MINOVA L100</td>
+                                        <td>13,000 lm / 100W</td>
+                                        <td>800 Wh LiFePO4</td>
+                                        <td>Collector Roads / Residential</td>
+                                        <td>Dual-axis structural mounting options, low wind cut-in</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="model-name">MINOVA L150</td>
+                                        <td>19,500 lm / 150W</td>
+                                        <td>1,200 Wh LiFePO4</td>
+                                        <td>Arterial Roadways</td>
+                                        <td>Bifacial solar surface tracking, reinforced marine-grade alloy</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="model-name">MINOVA L200</td>
+                                        <td>26,000 lm / 200W</td>
+                                        <td>1,600 Wh LiFePO4</td>
+                                        <td>Highways / Expressways</td>
+                                        <td>External wind aerodynamic fairings, real-time node telemetry</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="model-name">MINOVA L300</td>
+                                        <td>39,000 lm / 300W</td>
+                                        <td>2,400 Wh LiFePO4</td>
+                                        <td>Industrial Logistics Yards</td>
+                                        <td>Dual-luminaire modules, high-altitude structural rating</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
 
-                    <article class="product-card">
-                        <span class="product-badge">IoT Gateway</span>
-                        <h3>EZH-EdgeGateway</h3>
-                        <p>A ruggedized industrial gateway featuring RS-485 Modbus, CAN Bus, and cellular failover for high-reliability telemetry logging in harsh environments.</p>
-                    </article>
+                    <!-- Pane 2: Residential Systems -->
+                    <div class="tab-pane" id="pane-residential" role="tabpanel" aria-labelledby="tab-residential">
+                        <p class="pane-description">Premium grid-interactive and off-grid micro-hybrid generation centers. Engineered to isolate residential consumers from frequent brownouts, high tariff escalations, and power quality anomalies through sub-millisecond line switching capabilities.</p>
+                        <div class="table-responsive">
+                            <table class="specs-table">
+                                <thead>
+                                    <tr>
+                                        <th>Model</th>
+                                        <th>Solar Array Cap</th>
+                                        <th>Wind Turbine Asset</th>
+                                        <th>Daily Avg Yield</th>
+                                        <th>BESS Storage Option</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="model-name">MINOVA H2</td>
+                                        <td>2.0 kWp</td>
+                                        <td>0.5 kW Vertical Axis</td>
+                                        <td>10 - 12 kWh</td>
+                                        <td>5.0 kWh Modular Rack</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="model-name">MINOVA H3</td>
+                                        <td>3.0 kWp</td>
+                                        <td>1.0 kW Vertical Axis</td>
+                                        <td>16 - 20 kWh</td>
+                                        <td>5.0 / 10.0 kWh Expandable</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="model-name">MINOVA H5</td>
+                                        <td>5.0 kWp</td>
+                                        <td>1.5 kW Horizontal Axis</td>
+                                        <td>28 - 34 kWh</td>
+                                        <td>10.0 kWh High Output</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="model-name">MINOVA H7</td>
+                                        <td>7.5 kWp</td>
+                                        <td>2.0 kW Horizontal Axis</td>
+                                        <td>42 - 50 kWh</td>
+                                        <td>15.0 kWh High Output</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="model-name">MINOVA H10</td>
+                                        <td>10.0 kWp</td>
+                                        <td>3.0 kW Dual Turbines</td>
+                                        <td>58 - 70 kWh</td>
+                                        <td>20.0 kWh Enterprise Base</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
 
-                    <article class="product-card">
-                        <span class="product-badge">Edge AI</span>
-                        <h3>EZH-AILobe Module</h3>
-                        <p>An ultra-low-power hardware module designed to run localized anomaly detection and audio/vibration spectral analysis using tinyML frameworks.</p>
-                    </article>
+                    <!-- Pane 3: Agri & Commercial -->
+                    <div class="tab-pane" id="pane-agri-comm" role="tabpanel" aria-labelledby="tab-agri-comm">
+                        <div class="sub-pane-header">
+                            <h3>MINOVA A Series | Agriculture Systems</h3>
+                            <p class="pane-description">Built for harsh conditions and high transient starting currents. Optimized for multi-phase agricultural pumps, automated micro-irrigation processing, and rural off-grid operations.</p>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="specs-table">
+                                <thead>
+                                    <tr>
+                                        <th>Model</th>
+                                        <th>Pump Power Rating</th>
+                                        <th>Hybrid Gen Capacity</th>
+                                        <th>Daily Water Delivery Output (100M Head)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="model-name">MINOVA A3</td>
+                                        <td>3.0 HP Pumps</td>
+                                        <td>4.5 kW Combined</td>
+                                        <td>Up to 45,000 Liters / Day</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="model-name">MINOVA A5</td>
+                                        <td>5.0 HP Pumps</td>
+                                        <td>7.5 kW Combined</td>
+                                        <td>Up to 75,000 Liters / Day</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="model-name">MINOVA A10</td>
+                                        <td>10.0 HP Pumps</td>
+                                        <td>15.0 kW Combined</td>
+                                        <td>Up to 160,000 Liters / Day</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="model-name">MINOVA A20</td>
+                                        <td>20.0 HP Pumps</td>
+                                        <td>30.0 kW Combined</td>
+                                        <td>Up to 330,000 Liters / Day</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="sub-pane-header" style="margin-top: var(--spacing-8);">
+                            <h3>MINOVA C Series | Commercial Systems</h3>
+                            <p class="pane-description">Designed for corporate campuses, office parks, and commercial operations. Engineered for seamless peak-tariff mitigation, demand-charge reduction, and automated power factor correction.</p>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="specs-table">
+                                <thead>
+                                    <tr>
+                                        <th>Model</th>
+                                        <th>Inverter Rating</th>
+                                        <th>Solar Configuration</th>
+                                        <th>Wind Kinetic Matrix</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="model-name">MINOVA C10</td>
+                                        <td>10 kW Multi-Phase</td>
+                                        <td>12 kWp Monocrystalline</td>
+                                        <td>3 kW Aerodynamic Wind Array</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="model-name">MINOVA C20</td>
+                                        <td>20 kW Multi-Phase</td>
+                                        <td>25 kWp Monocrystalline</td>
+                                        <td>5 kW Aerodynamic Wind Array</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="model-name">MINOVA C30</td>
+                                        <td>30 kW Multi-Phase</td>
+                                        <td>35 kWp Monocrystalline</td>
+                                        <td>10 kW Aerodynamic Wind Array</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="model-name">MINOVA C50</td>
+                                        <td>50 kW Multi-Phase</td>
+                                        <td>60 kWp High Efficiency</td>
+                                        <td>15 kW Aerodynamic Wind Array</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Pane 4: Industrial Systems -->
+                    <div class="tab-pane" id="pane-industrial" role="tabpanel" aria-labelledby="tab-industrial">
+                        <p class="pane-description">High-capacity, heavy-duty microgrid installations engineered specifically for automated production environments, heavy manufacturing facilities, and localized grid reinforcement configurations.</p>
+                        <div class="table-responsive">
+                            <table class="specs-table">
+                                <thead>
+                                    <tr>
+                                        <th>Model</th>
+                                        <th>Continuous AC Output</th>
+                                        <th>Solar PV Matrix Max</th>
+                                        <th>Wind Turbine Assembly</th>
+                                        <th>Enclosure Architecture</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="model-name">MINOVA I25</td>
+                                        <td>25 kW</td>
+                                        <td>30 kWp</td>
+                                        <td>10 kW Turbine</td>
+                                        <td>NEMA 4X Multi-Cabinet</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="model-name">MINOVA I50</td>
+                                        <td>50 kW</td>
+                                        <td>60 kWp</td>
+                                        <td>20 kW Turbine</td>
+                                        <td>NEMA 4X Multi-Cabinet</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="model-name">MINOVA I100</td>
+                                        <td>100 kW</td>
+                                        <td>120 kWp</td>
+                                        <td>40 kW Multi-Turbine</td>
+                                        <td>IP65 Thermal Enclosure</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="model-name">MINOVA I250</td>
+                                        <td>250 kW</td>
+                                        <td>300 kWp</td>
+                                        <td>100 kW Multi-Turbine</td>
+                                        <td>10ft ISO Climate Container</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="model-name">MINOVA I500</td>
+                                        <td>500 kW</td>
+                                        <td>600 kWp</td>
+                                        <td>200 kW Multi-Turbine</td>
+                                        <td>20ft ISO Climate Container</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="model-name">MINOVA I1000</td>
+                                        <td>1000 kW (1 MW)</td>
+                                        <td>1200 kWp</td>
+                                        <td>400 kW Multi-Turbine</td>
+                                        <td>40ft ISO Climate Container</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Pane 5: Battery Storage -->
+                    <div class="tab-pane" id="pane-battery" role="tabpanel" aria-labelledby="tab-battery">
+                        <p class="pane-description">Utility-grade Lithium Iron Phosphate (LiFePO4) Battery Energy Storage Systems (BESS). Equipped with sub-millisecond multi-point voltage telemetry, integrated active balancing circuitry, and multi-stage fire mitigation technologies.</p>
+                        <div class="table-responsive">
+                            <table class="specs-table">
+                                <thead>
+                                    <tr>
+                                        <th>Model</th>
+                                        <th>Nominal Capacity</th>
+                                        <th>Cell Chemistry</th>
+                                        <th>Voltage Profile</th>
+                                        <th>Thermal Control Matrix</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="model-name">MINOVA B5</td>
+                                        <td>5.12 kWh</td>
+                                        <td>LiFePO4 (LFP)</td>
+                                        <td>51.2 VDC</td>
+                                        <td>Passive Extruded Aluminum</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="model-name">MINOVA B10</td>
+                                        <td>10.24 kWh</td>
+                                        <td>LiFePO4 (LFP)</td>
+                                        <td>51.2 VDC</td>
+                                        <td>Forced Convection Fan Array</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="model-name">MINOVA B15</td>
+                                        <td>15.36 kWh</td>
+                                        <td>LiFePO4 (LFP)</td>
+                                        <td>102.4 VDC</td>
+                                        <td>Forced Convection Fan Array</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="model-name">MINOVA B20</td>
+                                        <td>20.48 kWh</td>
+                                        <td>LiFePO4 (LFP)</td>
+                                        <td>204.8 VDC</td>
+                                        <td>Active Solid-State Refrigeration</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="model-name">MINOVA B50</td>
+                                        <td>51.20 kWh</td>
+                                        <td>LiFePO4 (LFP)</td>
+                                        <td>409.6 VDC</td>
+                                        <td>Liquid-Glycol Circulation Loops</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Pane 6: Smart Platform -->
+                    <div class="tab-pane" id="pane-platform" role="tabpanel" aria-labelledby="tab-platform">
+                        <p class="pane-description">The MINOVA ecosystem is coordinated by a powerful multi-tier automation layer that balances power conversion efficiency with cloud diagnostics.</p>
+                        <div class="platform-grid">
+                            <article class="platform-card">
+                                <div class="platform-badge">Hardware</div>
+                                <h3>MINOVA Core / Core+</h3>
+                                <p>Our edge hardware controller featuring dual-core processors to optimize real-time multi-source MPPT algorithms at a 20kHz sampling frequency.</p>
+                            </article>
+                            <article class="platform-card">
+                                <div class="platform-badge">Software</div>
+                                <h3>MINOVA Edge</h3>
+                                <p>Locally deployed software stack that executes high-speed islanding protection and handles transient load surges without requiring cloud connectivity.</p>
+                            </article>
+                            <article class="platform-card">
+                                <div class="platform-badge">Hardware</div>
+                                <h3>MINOVA Sync</h3>
+                                <p>A hardware synchronization matrix that dynamically aligns inverter output phases with external grid waveforms to ensure clean transitions.</p>
+                            </article>
+                            <article class="platform-card">
+                                <div class="platform-badge">User App</div>
+                                <h3>MINOVA Connect App</h3>
+                                <p>User application delivering real-time telemetry updates, detailed battery diagnostic breakdowns, and customizable charge scheduling options.</p>
+                            </article>
+                            <article class="platform-card">
+                                <div class="platform-badge">Enterprise</div>
+                                <h3>MINOVA Cloud & AI</h3>
+                                <p>An enterprise-grade IoT platform that leverages machine learning to forecast localized generation capacity and optimize system lifecycle efficiency.</p>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technology Architecture Section -->
+        <section id="architecture" class="architecture-section">
+            <div class="section-container">
+                <p class="section-subtitle">System Topology</p>
+                <h2>Technology Architecture Flow</h2>
+                <p class="section-intro">The systematic structural flow within a MINOVA smart hybrid installation routes harvested power seamlessly through high-efficiency conversion stages to ensure consistent output quality.</p>
+                
+                <div class="flowchart-container">
+                    <div class="flowchart-step">
+                        <div class="step-num">01</div>
+                        <div class="step-icon">☀️</div>
+                        <h4>Solar Panels</h4>
+                        <p>Photovoltaic Array</p>
+                    </div>
+                    <div class="flowchart-arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </div>
+                    <div class="flowchart-step">
+                        <div class="step-num">02</div>
+                        <div class="step-icon">🌀</div>
+                        <h4>Wind Turbine</h4>
+                        <p>Kinetic Array</p>
+                    </div>
+                    <div class="flowchart-arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </div>
+                    <div class="flowchart-step highlight">
+                        <div class="step-num">03</div>
+                        <div class="step-icon">⚡</div>
+                        <h4>Hybrid MPPT</h4>
+                        <p>Dual-Source Trackers</p>
+                    </div>
+                    <div class="flowchart-arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </div>
+                    <div class="flowchart-step core-controller">
+                        <div class="step-num">04</div>
+                        <div class="step-icon">🤖</div>
+                        <h4>MINOVA Core AI</h4>
+                        <p>Local Routing Decisions</p>
+                    </div>
+                    <div class="flowchart-arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </div>
+                    <div class="flowchart-step">
+                        <div class="step-num">05</div>
+                        <div class="step-icon">🔋</div>
+                        <h4>Battery Storage</h4>
+                        <p>LiFePO4 Storage (BESS)</p>
+                    </div>
+                    <div class="flowchart-arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </div>
+                    <div class="flowchart-step">
+                        <div class="step-num">06</div>
+                        <div class="step-icon">🔄</div>
+                        <h4>Hybrid Inverter</h4>
+                        <p>Pure Sine DC-AC Inversion</p>
+                    </div>
+                    <div class="flowchart-arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </div>
+                    <div class="flowchart-step destination">
+                        <div class="step-num">07</div>
+                        <div class="step-icon">🏭</div>
+                        <h4>Grid / Load</h4>
+                        <p>Destination Distribution</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Strategic Roadmap Section -->
+        <section id="roadmap" class="roadmap-section">
+            <div class="section-container">
+                <p class="section-subtitle">Strategic Vision</p>
+                <h2>Future Roadmap</h2>
+                <p class="section-intro">EZHUMIN TECHNOLOGIES is committed to systematic R&D progression, scaling product execution cleanly across municipal, residential, commercial, and utility sectors globally.</p>
+                
+                <div class="timeline">
+                    <div class="timeline-line"></div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-year">2026</div>
+                        <div class="timeline-content">
+                            <h3>Municipal Infrastructure Dominance</h3>
+                            <p>Rollout of the MINOVA L Series across Indian highways, urban development zones, and smart city deployments.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-year">2027</div>
+                        <div class="timeline-content">
+                            <h3>Residential Market Penetration</h3>
+                            <p>Launch of the H Series consumer microgrids alongside scalable B5/B10 residential battery packs.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-year">2028</div>
+                        <div class="timeline-content">
+                            <h3>Commercial Sector Expansion</h3>
+                            <p>Deployment of mid-tier C Series energy setups tailored for corporate complexes and agricultural cooperatives.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-year">2029</div>
+                        <div class="timeline-content">
+                            <h3>Heavy Industrial Deployment</h3>
+                            <p>Commissioning of high-capacity containerized I Series microgrids to support automated manufacturing plants.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-year">2030</div>
+                        <div class="timeline-content">
+                            <h3>Next-Gen AI Platform Launch</h3>
+                            <p>Introduction of autonomous peer-to-peer micro-grid trading networks managed entirely via MINOVA AI.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-year">2031</div>
+                        <div class="timeline-content">
+                            <h3>Global Market Scaling</h3>
+                            <p>Expanding manufacturing footprint and establishing international distribution channels across Europe, APAC, and North America.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -253,9 +749,13 @@
             <div class="cta-container">
                 <h2>Bring intelligence to your hardware</h2>
                 <p>
-                    Whether you need a custom RTOS kernel driver, a high-reliability smart energy controller, or a secure IoT node network, our team is ready to design your solution.
+                    Partner with EZHUMIN TECHNOLOGIES to transform your energy profile. Our engineering teams provide comprehensive site analysis, hybrid architectural optimization, and turn-key deployment services worldwide.
                 </p>
-                <a href="mailto:engineering@ezhumin.com" class="btn btn-primary btn-large">Request Technical Consult</a>
+                <div class="cta-info">
+                    <p class="cta-phone">Phone: <strong>+91 (422) 456-7890</strong> or <strong>+91 98765 43210</strong></p>
+                    <p class="cta-address">HQ Address: <strong>Tech Park Phase II, ELCOT IT Park, Coimbatore, Tamil Nadu 641014, India</strong></p>
+                </div>
+                <a href="mailto:solutions@ezhumin.com" class="btn btn-primary btn-large" style="margin-top: var(--spacing-6);">Request Technical Consult</a>
             </div>
         </section>
 
@@ -315,9 +815,10 @@
             <div class="footer-column">
                 <h3>Products</h3>
                 <ul>
-                    <li><a href="#products">EZH-GridController</a></li>
-                    <li><a href="#products">EZH-EdgeGateway</a></li>
-                    <li><a href="#products">EZH-AILobe Module</a></li>
+                    <li><a href="#products">MINOVA L-Series</a></li>
+                    <li><a href="#products">MINOVA H-Series</a></li>
+                    <li><a href="#products">MINOVA B-Series</a></li>
+                    <li><a href="#products">MINOVA Industrial</a></li>
                 </ul>
             </div>
 

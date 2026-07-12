@@ -892,6 +892,501 @@ section {
     margin-bottom: var(--spacing-6);
 }
 
+.cta-info {
+    margin-bottom: var(--spacing-6);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+}
+
+.cta-info strong {
+    color: var(--color-accent);
+}
+
+/* ---------------------------------------------------------------------
+   8. MINOVA PRODUCT PORTFOLIO, TOPOLOGY FLOW & ROADMAP STYLES
+   --------------------------------------------------------------------- */
+
+/* Philosophy Grids */
+.philosophy-grid {
+    display: grid;
+    gap: var(--spacing-8);
+    grid-template-columns: 1fr;
+    margin-bottom: var(--spacing-10);
+}
+
+@media (min-width: 768px) {
+    .philosophy-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.values-grid {
+    display: grid;
+    gap: var(--spacing-6);
+    grid-template-columns: 1fr;
+    border-top: 1px solid var(--color-border);
+    padding-top: var(--spacing-8);
+}
+
+@media (min-width: 768px) {
+    .values-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.value-item {
+    background-color: var(--color-bg-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-6);
+    transition: all var(--transition-normal);
+}
+
+.value-item:hover {
+    border-color: var(--color-accent);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-glow);
+}
+
+.value-icon {
+    font-size: 2rem;
+    margin-bottom: var(--spacing-4);
+}
+
+.value-item h3 {
+    margin-bottom: var(--spacing-2);
+}
+
+.value-item p {
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+}
+
+/* Section Introductions */
+.section-intro {
+    font-size: var(--font-size-lg);
+    color: var(--color-text-secondary);
+    max-width: 800px;
+    margin-bottom: var(--spacing-8);
+}
+
+/* Product Category Tabs */
+.product-tabs {
+    display: flex;
+    gap: var(--spacing-2);
+    overflow-x: auto;
+    padding-bottom: var(--spacing-4);
+    margin-bottom: var(--spacing-8);
+    border-bottom: 1px solid var(--color-border);
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-border) transparent;
+}
+
+.product-tabs::-webkit-scrollbar {
+    height: 4px;
+}
+
+.product-tabs::-webkit-scrollbar-thumb {
+    background-color: var(--color-border);
+    border-radius: var(--border-radius-sm);
+}
+
+.tab-btn {
+    padding: var(--spacing-3) var(--spacing-5);
+    background-color: var(--color-bg-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-md);
+    color: var(--color-text-secondary);
+    font-weight: var(--font-weight-semibold);
+    font-size: var(--font-size-sm);
+    white-space: nowrap;
+    transition: all var(--transition-fast);
+}
+
+.tab-btn:hover {
+    color: var(--color-text-primary);
+    border-color: var(--color-text-muted);
+    background-color: var(--color-bg-surface-elevated);
+}
+
+.tab-btn.active {
+    color: var(--color-bg-base);
+    background-color: var(--color-accent);
+    border-color: var(--color-accent);
+    box-shadow: var(--shadow-glow);
+}
+
+/* Tab Panes */
+.tab-content {
+    position: relative;
+    min-height: 250px;
+}
+
+.tab-pane {
+    display: none;
+    animation: fade-in var(--transition-normal);
+}
+
+.tab-pane.active {
+    display: block;
+}
+
+.pane-description {
+    font-size: var(--font-size-base);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--spacing-6);
+    max-width: 900px;
+    line-height: 1.6;
+}
+
+.sub-pane-header h3 {
+    color: var(--color-accent);
+    margin-bottom: var(--spacing-2);
+}
+
+/* Specs Table Layout */
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-lg);
+    background-color: var(--color-bg-surface);
+    margin-bottom: var(--spacing-8);
+}
+
+.specs-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: var(--font-size-sm);
+}
+
+.specs-table th {
+    background-color: rgba(255, 255, 255, 0.02);
+    border-bottom: 2px solid var(--color-border);
+    padding: var(--spacing-4) var(--spacing-5);
+    font-family: var(--font-mono);
+    color: var(--color-text-primary);
+    font-size: var(--font-size-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.specs-table td {
+    padding: var(--spacing-4) var(--spacing-5);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    color: var(--color-text-secondary);
+    vertical-align: middle;
+}
+
+.specs-table tr:last-child td {
+    border-bottom: none;
+}
+
+.specs-table tr {
+    transition: background-color var(--transition-fast);
+}
+
+.specs-table tr:hover {
+    background-color: rgba(0, 240, 255, 0.02);
+}
+
+.model-name {
+    font-weight: var(--font-weight-bold);
+    color: var(--color-accent);
+    font-family: var(--font-mono);
+}
+
+/* Smart Platform Grid */
+.platform-grid {
+    display: grid;
+    gap: var(--spacing-6);
+    grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+    .platform-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .platform-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.platform-card {
+    background-color: var(--color-bg-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-6);
+    position: relative;
+    overflow: hidden;
+    transition: all var(--transition-normal);
+}
+
+.platform-card:hover {
+    border-color: var(--color-accent);
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px -15px rgba(0, 240, 255, 0.2);
+}
+
+.platform-badge {
+    position: absolute;
+    top: var(--spacing-4);
+    right: var(--spacing-4);
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    font-weight: var(--font-weight-bold);
+    background-color: var(--color-border);
+    color: var(--color-text-secondary);
+    padding: var(--spacing-1) var(--spacing-2);
+    border-radius: var(--border-radius-sm);
+    text-transform: uppercase;
+}
+
+.platform-card h3 {
+    margin-bottom: var(--spacing-3);
+    padding-right: var(--spacing-12);
+}
+
+.platform-card p {
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+}
+
+/* Technology Architecture Flowchart */
+.architecture-section {
+    border-top: 1px solid var(--color-border);
+    padding: var(--spacing-16) 0;
+}
+
+.flowchart-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-4);
+    margin-top: var(--spacing-8);
+}
+
+@media (min-width: 1024px) {
+    .flowchart-container {
+        flex-direction: row;
+        justify-content: space-between;
+        gap: var(--spacing-2);
+    }
+}
+
+.flowchart-step {
+    background-color: var(--color-bg-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-5);
+    text-align: center;
+    width: 100%;
+    max-width: 280px;
+    position: relative;
+    transition: all var(--transition-normal);
+}
+
+@media (min-width: 1024px) {
+    .flowchart-step {
+        width: calc((100% - 12rem) / 7);
+        padding: var(--spacing-4) var(--spacing-2);
+    }
+}
+
+.flowchart-step:hover {
+    border-color: var(--color-text-muted);
+    transform: translateY(-2px);
+}
+
+.flowchart-step.highlight {
+    border-color: var(--color-accent);
+    background-color: rgba(0, 240, 255, 0.02);
+    box-shadow: var(--shadow-glow);
+}
+
+.flowchart-step.core-controller {
+    border-color: var(--color-accent);
+    background-color: var(--color-bg-surface-elevated);
+    box-shadow: 0 0 25px rgba(0, 240, 255, 0.2);
+}
+
+.flowchart-step.destination {
+    border-color: var(--color-text-primary);
+}
+
+.step-num {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--color-accent);
+    margin-bottom: var(--spacing-1);
+    opacity: 0.7;
+}
+
+.step-icon {
+    font-size: 1.5rem;
+    margin-bottom: var(--spacing-2);
+}
+
+.flowchart-step h4 {
+    font-size: var(--font-size-sm);
+    margin-bottom: var(--spacing-1);
+    color: var(--color-text-primary);
+}
+
+.flowchart-step p {
+    font-size: 0.7rem;
+    color: var(--color-text-secondary);
+}
+
+.flowchart-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-muted);
+    width: 24px;
+    height: 24px;
+}
+
+.flowchart-arrow svg {
+    width: 20px;
+    height: 20px;
+    transform: rotate(90deg);
+}
+
+@media (min-width: 1024px) {
+    .flowchart-arrow svg {
+        transform: rotate(0deg);
+    }
+}
+
+.flowchart-step.highlight .step-num,
+.flowchart-step.core-controller .step-num {
+    color: var(--color-text-primary);
+    font-weight: bold;
+}
+
+/* Strategic Future Roadmap */
+.roadmap-section {
+    border-top: 1px solid var(--color-border);
+    padding: var(--spacing-16) 0;
+}
+
+.timeline {
+    position: relative;
+    max-width: 900px;
+    margin: var(--spacing-10) auto 0 auto;
+    padding: 0 var(--spacing-6);
+}
+
+.timeline-line {
+    position: absolute;
+    left: var(--spacing-6);
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--color-border), var(--color-accent), var(--color-border));
+}
+
+@media (min-width: 768px) {
+    .timeline-line {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: var(--spacing-10);
+    padding-left: var(--spacing-8);
+}
+
+@media (min-width: 768px) {
+    .timeline-item {
+        padding-left: 0;
+        width: 50%;
+        margin-bottom: var(--spacing-8);
+    }
+    
+    .timeline-item:nth-child(even) {
+        margin-left: auto;
+        padding-left: var(--spacing-10);
+    }
+    
+    .timeline-item:nth-child(odd) {
+        margin-right: auto;
+        padding-right: var(--spacing-10);
+        text-align: right;
+    }
+}
+
+.timeline-dot {
+    position: absolute;
+    left: calc(var(--spacing-6) - 5px);
+    top: 6px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: var(--color-bg-base);
+    border: 2px solid var(--color-accent);
+    box-shadow: var(--shadow-glow);
+    z-index: 2;
+    transition: transform var(--transition-fast);
+}
+
+.timeline-item:hover .timeline-dot {
+    transform: scale(1.3);
+    background-color: var(--color-accent);
+}
+
+@media (min-width: 768px) {
+    .timeline-dot {
+        left: auto;
+        right: -6px;
+    }
+    
+    .timeline-item:nth-child(even) .timeline-dot {
+        left: -6px;
+        right: auto;
+    }
+}
+
+.timeline-year {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-accent);
+    margin-bottom: var(--spacing-2);
+    line-height: 1;
+}
+
+.timeline-content {
+    background-color: var(--color-bg-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-6);
+    transition: all var(--transition-normal);
+}
+
+.timeline-content:hover {
+    border-color: var(--color-accent-dim);
+    box-shadow: 0 10px 30px -15px rgba(0, 240, 255, 0.1);
+}
+
+.timeline-content h3 {
+    font-size: var(--font-size-lg);
+    margin-bottom: var(--spacing-2);
+}
+
+.timeline-content p {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    line-height: 1.5;
+}
+
 /* Premium Footer Styling */
 .site-footer {
     background-color: #030305;
