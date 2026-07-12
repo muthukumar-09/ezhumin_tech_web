@@ -80,9 +80,9 @@ document.addEventListener('DOMContentLoaded', () => {
         '.tech-category, ' +
         '.benefit-item, ' +
         '.value-item, ' +
-        '.showcase-item, ' +
-        '.showcase-image-wrapper, ' +
-        '.spec-tile, ' +
+        '.product-showcase-card, ' +
+        '.card-image-wrapper, ' +
+        '.card-stat, ' +
         '.flowchart-step, ' +
         '.timeline-item'
     );
@@ -115,5 +115,147 @@ document.addEventListener('DOMContentLoaded', () => {
                 mobileToggle.setAttribute('aria-expanded', 'false');
             });
         });
+    }
+
+    // =========================================================================
+    // 5. PREMIUM HORIZONTAL PRODUCT SLIDER CONTROLLER (VANILLA JS)
+    // =========================================================================
+    const sliderTrack = document.getElementById('slider-track');
+    const sliderViewport = document.getElementById('slider-viewport');
+    const slides = document.querySelectorAll('.slider-slide');
+    const prevBtn = document.getElementById('slider-prev');
+    const nextBtn = document.getElementById('slider-next');
+    const dots = document.querySelectorAll('.dot-indicator');
+
+    if (sliderTrack && sliderViewport && slides.length > 0) {
+        let currentSlideIndex = 0;
+        let isDragging = false;
+        let startX = 0;
+        let currentTranslate = 0;
+        let prevTranslate = 0;
+        let slideWidth = 0;
+
+        // Calculate dimensions
+        function updateSlideWidth() {
+            slideWidth = sliderViewport.clientWidth;
+            // Force reset track translation on resize
+            goToSlide(currentSlideIndex, false);
+        }
+
+        // Snap to target slide
+        function goToSlide(index, animate = true) {
+            // Bound safety checks
+            if (index < 0) index = 0;
+            if (index >= slides.length) index = slides.length - 1;
+            
+            currentSlideIndex = index;
+            currentTranslate = -currentSlideIndex * slideWidth;
+            prevTranslate = currentTranslate;
+
+            // Apply style with or without transitions
+            if (animate) {
+                sliderTrack.style.transition = 'transform 0.45s cubic-bezier(0.25, 1, 0.5, 1)';
+            } else {
+                sliderTrack.style.transition = 'none';
+            }
+            sliderTrack.style.transform = `translateX(${currentTranslate}px)`;
+
+            // Update interactive buttons state
+            if (prevBtn) prevBtn.disabled = (currentSlideIndex === 0);
+            if (nextBtn) nextBtn.disabled = (currentSlideIndex === slides.length - 1);
+
+            // Sync dots indicator active layout
+            dots.forEach((dot, idx) => {
+                if (idx === currentSlideIndex) {
+                    dot.classList.add('active');
+                    dot.setAttribute('aria-selected', 'true');
+                } else {
+                    dot.classList.remove('active');
+                    dot.setAttribute('aria-selected', 'false');
+                }
+            });
+        }
+
+        // Click controllers
+        if (prevBtn) {
+            prevBtn.addEventListener('click', () => {
+                if (currentSlideIndex > 0) goToSlide(currentSlideIndex - 1);
+            });
+        }
+
+        if (nextBtn) {
+            nextBtn.addEventListener('click', () => {
+                if (currentSlideIndex < slides.length - 1) goToSlide(currentSlideIndex + 1);
+            });
+        }
+
+        dots.forEach((dot, idx) => {
+            dot.addEventListener('click', () => goToSlide(idx));
+        });
+
+        // Unified pointer events for desktop drag + mobile swipe
+        sliderTrack.addEventListener('pointerdown', (e) => {
+            // Ignore if clicked on buttons or links
+            if (e.target.closest('a') || e.target.closest('button')) return;
+
+            isDragging = true;
+            startX = e.clientX;
+            sliderTrack.style.transition = 'none'; // Instant response
+            sliderTrack.classList.add('dragging');
+            sliderTrack.setPointerCapture(e.pointerId);
+        });
+
+        sliderTrack.addEventListener('pointermove', (e) => {
+            if (!isDragging) return;
+            const currentX = e.clientX;
+            const diffX = currentX - startX;
+            const translate = prevTranslate + diffX;
+            
+            // Limit over-scrolling resistance
+            if (currentSlideIndex === 0 && diffX > 0) {
+                // Dragging right at start boundary
+                sliderTrack.style.transform = `translateX(${prevTranslate + diffX * 0.3}px)`;
+            } else if (currentSlideIndex === slides.length - 1 && diffX < 0) {
+                // Dragging left at end boundary
+                sliderTrack.style.transform = `translateX(${prevTranslate + diffX * 0.3}px)`;
+            } else {
+                sliderTrack.style.transform = `translateX(${translate}px)`;
+            }
+        });
+
+        function handlePointerUpOrCancel(e) {
+            if (!isDragging) return;
+            isDragging = false;
+            sliderTrack.classList.remove('dragging');
+            sliderTrack.releasePointerCapture(e.pointerId);
+
+            const diffX = e.clientX - startX;
+            const threshold = 80; // pixels to trigger slide transition
+
+            if (Math.abs(diffX) > threshold) {
+                if (diffX < 0 && currentSlideIndex < slides.length - 1) {
+                    goToSlide(currentSlideIndex + 1);
+                } else if (diffX > 0 && currentSlideIndex > 0) {
+                    goToSlide(currentSlideIndex - 1);
+                } else {
+                    goToSlide(currentSlideIndex); // rebound
+                }
+            } else {
+                goToSlide(currentSlideIndex); // rebound
+            }
+        }
+
+        sliderTrack.addEventListener('pointerup', handlePointerUpOrCancel);
+        sliderTrack.addEventListener('pointercancel', handlePointerUpOrCancel);
+
+        // Prevent native HTML image dragging interfering with custom script
+        sliderTrack.addEventListener('dragstart', (e) => e.preventDefault());
+
+        // Initialize dimensions and bind resize event
+        updateSlideWidth();
+        window.addEventListener('resize', updateSlideWidth);
+        
+        // Re-calibrates layout width when document has fully rendered
+        window.addEventListener('load', updateSlideWidth);
     }
 });

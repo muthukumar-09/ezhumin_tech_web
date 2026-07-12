@@ -182,195 +182,221 @@
                 <h2>MINOVA Smart Hybrid Systems</h2>
                 <p class="section-intro">The MINOVA ecosystem encompasses a comprehensive portfolio designed across multiple power tiers to satisfy specific spatial, operational, and financial parameters.</p>
                 
-                <div class="showcase-container">
+                <div class="slider-wrapper">
+                    <!-- Navigation Buttons -->
+                    <button class="slider-btn prev-btn" id="slider-prev" aria-label="Previous Product">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+                    </button>
+                    <button class="slider-btn next-btn" id="slider-next" aria-label="Next Product">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+                    </button>
+
+                    <div class="slider-viewport" id="slider-viewport">
+                        <div class="slider-track" id="slider-track">
+                            
+                            <!-- Card 1: MINOVA L Series -->
+                            <div class="product-showcase-card slider-slide">
+                                <div class="card-image-wrapper">
+                                    <img src="assets/minova_l_series.png" alt="MINOVA L Series" class="card-image" draggable="false">
+                                </div>
+                                <div class="card-body">
+                                    <span class="card-badge">MINOVA L Series</span>
+                                    <h3 class="card-title">Street Lighting</h3>
+                                    <p class="card-description">Autonomous hybrid municipal and industrial highway illumination assets featuring integrated kinetic-photovoltaic generation arrays and passive motion tracking.</p>
+                                    
+                                    <div class="card-stats-row">
+                                        <div class="card-stat">
+                                            <span class="stat-label">Power Range</span>
+                                            <span class="stat-value">50W - 300W</span>
+                                        </div>
+                                        <div class="card-stat">
+                                            <span class="stat-label">Deployments</span>
+                                            <span class="stat-value">Highways & Parks</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="tech-badge-row">
+                                        <span class="tech-pill">Bifacial PV</span>
+                                        <span class="tech-pill">Micro-Wind</span>
+                                        <span class="tech-pill">PIR Motion</span>
+                                    </div>
+                                    
+                                    <a href="#contact" class="btn btn-secondary card-btn">Explore</a>
+                                </div>
+                            </div>
+
+                            <!-- Card 2: MINOVA H Series -->
+                            <div class="product-showcase-card slider-slide">
+                                <div class="card-image-wrapper">
+                                    <img src="assets/minova_h_series.png" alt="MINOVA H Series" class="card-image" draggable="false">
+                                </div>
+                                <div class="card-body">
+                                    <span class="card-badge">MINOVA H Series</span>
+                                    <h3 class="card-title">Residential Power</h3>
+                                    <p class="card-description">Premium grid-interactive and off-grid micro-hybrid generation systems engineered to guarantee complete home power independence and load balancing.</p>
+                                    
+                                    <div class="card-stats-row">
+                                        <div class="card-stat">
+                                            <span class="stat-label">Power Range</span>
+                                            <span class="stat-value">2.0 - 10.0 kWp</span>
+                                        </div>
+                                        <div class="card-stat">
+                                            <span class="stat-label">Deployments</span>
+                                            <span class="stat-value">Smart Homes & Villas</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="tech-badge-row">
+                                        <span class="tech-pill">LiFePO4 Storage</span>
+                                        <span class="tech-pill">Sub-ms Switch</span>
+                                        <span class="tech-pill">Pure Sine</span>
+                                    </div>
+                                    
+                                    <a href="#contact" class="btn btn-secondary card-btn">Explore</a>
+                                </div>
+                            </div>
+
+                            <!-- Card 3: MINOVA A Series -->
+                            <div class="product-showcase-card slider-slide">
+                                <div class="card-image-wrapper">
+                                    <img src="assets/minova_a_series.png" alt="MINOVA A Series" class="card-image" draggable="false">
+                                </div>
+                                <div class="card-body">
+                                    <span class="card-badge">MINOVA A Series</span>
+                                    <h3 class="card-title">Agriculture Grids</h3>
+                                    <p class="card-description">High-torque off-grid agricultural micro-grids built to run heavy-duty irrigation pumps, field machinery, and processing units in remote terrains.</p>
+                                    
+                                    <div class="card-stats-row">
+                                        <div class="card-stat">
+                                            <span class="stat-label">Power Range</span>
+                                            <span class="stat-value">4.5 - 30.0 kW</span>
+                                        </div>
+                                        <div class="card-stat">
+                                            <span class="stat-label">Deployments</span>
+                                            <span class="stat-value">Pumps & Processing</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="tech-badge-row">
+                                        <span class="tech-pill">IP66 Weather</span>
+                                        <span class="tech-pill">High-Torque</span>
+                                        <span class="tech-pill">Off-Grid</span>
+                                    </div>
+                                    
+                                    <a href="#contact" class="btn btn-secondary card-btn">Explore</a>
+                                </div>
+                            </div>
+
+                            <!-- Card 4: MINOVA C Series -->
+                            <div class="product-showcase-card slider-slide">
+                                <div class="card-image-wrapper">
+                                    <img src="assets/minova_c_series.png" alt="MINOVA C Series" class="card-image" draggable="false">
+                                </div>
+                                <div class="card-body">
+                                    <span class="card-badge">MINOVA C Series</span>
+                                    <h3 class="card-title">Commercial Enterprise</h3>
+                                    <p class="card-description">Mid-tier commercial power architectures designed for corporate campuses and office parks, offering demand-charge reduction and power factor correction.</p>
+                                    
+                                    <div class="card-stats-row">
+                                        <div class="card-stat">
+                                            <span class="stat-label">Power Range</span>
+                                            <span class="stat-value">10 - 50 kW Multi</span>
+                                        </div>
+                                        <div class="card-stat">
+                                            <span class="stat-label">Deployments</span>
+                                            <span class="stat-value">Campus & Office Parks</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="tech-badge-row">
+                                        <span class="tech-pill">Peak Shaving</span>
+                                        <span class="tech-pill">Power Factor</span>
+                                        <span class="tech-pill">Multi-Source</span>
+                                    </div>
+                                    
+                                    <a href="#contact" class="btn btn-secondary card-btn">Explore</a>
+                                </div>
+                            </div>
+
+                            <!-- Card 5: MINOVA I Series -->
+                            <div class="product-showcase-card slider-slide">
+                                <div class="card-image-wrapper">
+                                    <img src="assets/minova_i_series.png" alt="MINOVA I Series" class="card-image" draggable="false">
+                                </div>
+                                <div class="card-body">
+                                    <span class="card-badge">MINOVA I Series</span>
+                                    <h3 class="card-title">Industrial Microgrids</h3>
+                                    <p class="card-description">Heavy multi-megawatt industrial micro-grids featuring rigorous sub-millisecond line switching and containerized climate-controlled system architecture.</p>
+                                    
+                                    <div class="card-stats-row">
+                                        <div class="card-stat">
+                                            <span class="stat-label">Power Range</span>
+                                            <span class="stat-value">25 kW - 1 MW</span>
+                                        </div>
+                                        <div class="card-stat">
+                                            <span class="stat-label">Deployments</span>
+                                            <span class="stat-value">Factories & Yards</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="tech-badge-row">
+                                        <span class="tech-pill">NEMA 4X</span>
+                                        <span class="tech-pill">ISO Container</span>
+                                        <span class="tech-pill">Sub-ms Switch</span>
+                                    </div>
+                                    
+                                    <a href="#contact" class="btn btn-secondary card-btn">Explore</a>
+                                </div>
+                            </div>
+
+                            <!-- Card 6: MINOVA B Series -->
+                            <div class="product-showcase-card slider-slide">
+                                <div class="card-image-wrapper">
+                                    <img src="assets/minova_b_series.png" alt="MINOVA B Series" class="card-image" draggable="false">
+                                </div>
+                                <div class="card-body">
+                                    <span class="card-badge">MINOVA B Series</span>
+                                    <h3 class="card-title">BESS Storage</h3>
+                                    <p class="card-description">Utility-grade Lithium Iron Phosphate (LiFePO4) battery enclosures equipped with active multi-point telemetry, active cell balancers, and active liquid cooling.</p>
+                                    
+                                    <div class="card-stats-row">
+                                        <div class="card-stat">
+                                            <span class="stat-label">Power Range</span>
+                                            <span class="stat-value">5.12 - 51.2 kWh</span>
+                                        </div>
+                                        <div class="card-stat">
+                                            <span class="stat-label">Deployments</span>
+                                            <span class="stat-value">Grid Storage & Backup</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="tech-badge-row">
+                                        <span class="tech-pill">LiFePO4 (LFP)</span>
+                                        <span class="tech-pill">Liquid Cooling</span>
+                                        <span class="tech-pill">Active Balance</span>
+                                    </div>
+                                    
+                                    <a href="#contact" class="btn btn-secondary card-btn">Explore</a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
                     
-                    <!-- 1. MINOVA L Series -->
-                    <div class="showcase-item" data-aos="fade-up">
-                        <div class="showcase-image-wrapper">
-                            <img src="assets/minova_l_series.png" alt="MINOVA L Series" loading="lazy" class="showcase-image">
-                        </div>
-                        <div class="showcase-content">
-                            <span class="showcase-badge">Street Lighting Systems</span>
-                            <h3 class="showcase-title">MINOVA L Series</h3>
-                            <p class="showcase-description">Completely autonomous, rugged municipal infrastructure illumination platforms. Designed to combine localized vertical aerodynamic micro-turbines and high-efficiency bifacial monocrystalline solar cells to guarantee operational performance across adverse climatic conditions.</p>
-                            <div class="showcase-specs-grid">
-                                <div class="spec-tile">
-                                    <span class="spec-label">Lumens / Power</span>
-                                    <span class="spec-value">6,500 - 39,000 lm</span>
-                                </div>
-                                <div class="spec-tile">
-                                    <span class="spec-label">Battery Capacity</span>
-                                    <span class="spec-value">400 - 2,400 Wh</span>
-                                </div>
-                                <div class="spec-tile">
-                                    <span class="spec-label">Cell Chemistry</span>
-                                    <span class="spec-value">LiFePO4 (LFP)</span>
-                                </div>
-                                <div class="spec-tile">
-                                    <span class="spec-label">Motion Profiling</span>
-                                    <span class="spec-value">Integrated Passive PIR</span>
-                                </div>
-                            </div>
-                            <a href="#contact" class="btn btn-secondary showcase-btn">Learn More</a>
-                        </div>
+                    <!-- Bottom Dot Indicators -->
+                    <div class="slider-dots" id="slider-dots">
+                        <button class="dot-indicator active" data-slide="0" aria-label="Go to slide 1"></button>
+                        <button class="dot-indicator" data-slide="1" aria-label="Go to slide 2"></button>
+                        <button class="dot-indicator" data-slide="2" aria-label="Go to slide 3"></button>
+                        <button class="dot-indicator" data-slide="3" aria-label="Go to slide 4"></button>
+                        <button class="dot-indicator" data-slide="4" aria-label="Go to slide 5"></button>
+                        <button class="dot-indicator" data-slide="5" aria-label="Go to slide 6"></button>
                     </div>
-
-                    <!-- 2. MINOVA H Series -->
-                    <div class="showcase-item" data-aos="fade-up">
-                        <div class="showcase-image-wrapper">
-                            <img src="assets/minova_h_series.png" alt="MINOVA H Series" loading="lazy" class="showcase-image">
-                        </div>
-                        <div class="showcase-content">
-                            <span class="showcase-badge">Residential Systems</span>
-                            <h3 class="showcase-title">MINOVA H Series</h3>
-                            <p class="showcase-description">Premium grid-interactive and off-grid micro-hybrid generation centers. Engineered to isolate residential consumers from frequent brownouts, high tariff escalations, and power quality anomalies through sub-millisecond line switching capabilities.</p>
-                            <div class="showcase-specs-grid">
-                                <div class="spec-tile">
-                                    <span class="spec-label">Solar Array Cap</span>
-                                    <span class="spec-value">2.0 - 10.0 kWp</span>
-                                </div>
-                                <div class="spec-tile">
-                                    <span class="spec-label">Wind Turbine</span>
-                                    <span class="spec-value">0.5 - 3.0 kW Axis</span>
-                                </div>
-                                <div class="spec-tile">
-                                    <span class="spec-label">Daily Avg Yield</span>
-                                    <span class="spec-value">10 - 70 kWh</span>
-                                </div>
-                                <div class="spec-tile">
-                                    <span class="spec-label">BESS Storage</span>
-                                    <span class="spec-value">5.0 - 20.0 kWh</span>
-                                </div>
-                            </div>
-                            <a href="#contact" class="btn btn-secondary showcase-btn">Learn More</a>
-                        </div>
-                    </div>
-
-                    <!-- 3. MINOVA A Series -->
-                    <div class="showcase-item" data-aos="fade-up">
-                        <div class="showcase-image-wrapper">
-                            <img src="assets/minova_a_series.png" alt="MINOVA A Series" loading="lazy" class="showcase-image">
-                        </div>
-                        <div class="showcase-content">
-                            <span class="showcase-badge">Agriculture Systems</span>
-                            <h3 class="showcase-title">MINOVA A Series</h3>
-                            <p class="showcase-description">Built for harsh conditions and high transient starting currents. Optimized for multi-phase agricultural pumps, automated micro-irrigation processing, and rural off-grid operations.</p>
-                            <div class="showcase-specs-grid">
-                                <div class="spec-tile">
-                                    <span class="spec-label">Pump Power Rating</span>
-                                    <span class="spec-value">3.0 - 20.0 HP</span>
-                                </div>
-                                <div class="spec-tile">
-                                    <span class="spec-label">Hybrid Capacity</span>
-                                    <span class="spec-value">4.5 - 30.0 kW</span>
-                                </div>
-                                <div class="spec-tile">
-                                    <span class="spec-label">Water Delivery</span>
-                                    <span class="spec-value">45k - 330k L/Day</span>
-                                </div>
-                                <div class="spec-tile">
-                                    <span class="spec-label">Max Pump Head</span>
-                                    <span class="spec-value">100M Standard</span>
-                                </div>
-                            </div>
-                            <a href="#contact" class="btn btn-secondary showcase-btn">Learn More</a>
-                        </div>
-                    </div>
-
-                    <!-- 4. MINOVA C Series -->
-                    <div class="showcase-item" data-aos="fade-up">
-                        <div class="showcase-image-wrapper">
-                            <img src="assets/minova_c_series.png" alt="MINOVA C Series" loading="lazy" class="showcase-image">
-                        </div>
-                        <div class="showcase-content">
-                            <span class="showcase-badge">Commercial Systems</span>
-                            <h3 class="showcase-title">MINOVA C Series</h3>
-                            <p class="showcase-description">Designed for corporate campuses, office parks, and commercial operations. Engineered for seamless peak-tariff mitigation, demand-charge reduction, and automated power factor correction.</p>
-                            <div class="showcase-specs-grid">
-                                <div class="spec-tile">
-                                    <span class="spec-label">Inverter Rating</span>
-                                    <span class="spec-value">10 - 50 kW Multi</span>
-                                </div>
-                                <div class="spec-tile">
-                                    <span class="spec-label">Solar Config</span>
-                                    <span class="spec-value">12 - 60 kWp Mono</span>
-                                </div>
-                                <div class="spec-tile">
-                                    <span class="spec-label">Wind Kinetic</span>
-                                    <span class="spec-value">3 - 15 kW Array</span>
-                                </div>
-                                <div class="spec-tile">
-                                    <span class="spec-label">Load Management</span>
-                                    <span class="spec-value">Dynamic Peak-Shaving</span>
-                                </div>
-                            </div>
-                            <a href="#contact" class="btn btn-secondary showcase-btn">Learn More</a>
-                        </div>
-                    </div>
-
-                    <!-- 5. MINOVA I Series -->
-                    <div class="showcase-item" data-aos="fade-up">
-                        <div class="showcase-image-wrapper">
-                            <img src="assets/minova_i_series.png" alt="MINOVA I Series" loading="lazy" class="showcase-image">
-                        </div>
-                        <div class="showcase-content">
-                            <span class="showcase-badge">Industrial Systems</span>
-                            <h3 class="showcase-title">MINOVA I Series</h3>
-                            <p class="showcase-description">High-capacity, heavy-duty microgrid installations engineered specifically for automated production environments, heavy manufacturing facilities, and localized grid reinforcement configurations.</p>
-                            <div class="showcase-specs-grid">
-                                <div class="spec-tile">
-                                    <span class="spec-label">Continuous AC</span>
-                                    <span class="spec-value">25 kW - 1 MW</span>
-                                </div>
-                                <div class="spec-tile">
-                                    <span class="spec-label">Solar PV Matrix</span>
-                                    <span class="spec-value">30 - 1200 kWp Max</span>
-                                </div>
-                                <div class="spec-tile">
-                                    <span class="spec-label">Wind Turbine</span>
-                                    <span class="spec-value">10 - 400 kW Assembly</span>
-                                </div>
-                                <div class="spec-tile">
-                                    <span class="spec-label">Enclosure</span>
-                                    <span class="spec-value">ISO Climate Container</span>
-                                </div>
-                            </div>
-                            <a href="#contact" class="btn btn-secondary showcase-btn">Learn More</a>
-                        </div>
-                    </div>
-
-                    <!-- 6. MINOVA B Series -->
-                    <div class="showcase-item" data-aos="fade-up">
-                        <div class="showcase-image-wrapper">
-                            <img src="assets/minova_b_series.png" alt="MINOVA B Series" loading="lazy" class="showcase-image">
-                        </div>
-                        <div class="showcase-content">
-                            <span class="showcase-badge">Battery Storage</span>
-                            <h3 class="showcase-title">MINOVA B Series</h3>
-                            <p class="showcase-description">Utility-grade Lithium Iron Phosphate (LiFePO4) Battery Energy Storage Systems (BESS). Equipped with sub-millisecond multi-point voltage telemetry, integrated active balancing circuitry, and multi-stage fire mitigation technologies.</p>
-                            <div class="showcase-specs-grid">
-                                <div class="spec-tile">
-                                    <span class="spec-label">Nominal Capacity</span>
-                                    <span class="spec-value">5.12 - 51.20 kWh</span>
-                                </div>
-                                <div class="spec-tile">
-                                    <span class="spec-label">Cell Chemistry</span>
-                                    <span class="spec-value">LiFePO4 (LFP)</span>
-                                </div>
-                                <div class="spec-tile">
-                                    <span class="spec-label">Voltage Profile</span>
-                                    <span class="spec-value">51.2 - 409.6 VDC</span>
-                                </div>
-                                <div class="spec-tile">
-                                    <span class="spec-label">Thermal Control</span>
-                                    <span class="spec-value">Liquid-Glycol Loop</span>
-                                </div>
-                            </div>
-                            <a href="#contact" class="btn btn-secondary showcase-btn">Learn More</a>
-                        </div>
-                    </div>
-
                 </div>
+            </div>
+        </section>
+            </div>
+        </section>
             </div>
         </section>
 
