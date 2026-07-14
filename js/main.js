@@ -47,6 +47,33 @@ document.addEventListener('DOMContentLoaded', () => {
             ticking = true;
         }
     }, { passive: true }); // passive: true bypasses CPU main-thread blocking, scrolling renders instantly
+    
+    // =========================================================================
+    // 2. HERO MOUSE PARALLAX (Subtle depth motion effect)
+    // =========================================================================
+    const heroSection = document.getElementById('hero');
+    const heroMedia = document.querySelector('.hero-media-placeholder');
+    if (heroSection && heroMedia) {
+        // Only run on hover-enabled (desktop) devices to avoid touch drag conflict
+        const isHoverSupported = window.matchMedia('(hover: hover)').matches;
+        if (isHoverSupported) {
+            heroSection.addEventListener('mousemove', (e) => {
+                const { width, height } = heroSection.getBoundingClientRect();
+                const moveX = (e.clientX / width - 0.5) * 15; // Shift max 7.5px left/right
+                const moveY = (e.clientY / height - 0.5) * 15; // Shift max 7.5px up/down
+                heroMedia.style.transform = `scale(1.05) translate(${moveX}px, ${moveY}px)`;
+            });
+            
+            heroSection.addEventListener('mouseleave', () => {
+                heroMedia.style.transition = 'transform 0.5s cubic-bezier(0.25, 1, 0.5, 1)';
+                heroMedia.style.transform = 'scale(1.05) translate(0px, 0px)';
+            });
+            
+            heroSection.addEventListener('mouseenter', () => {
+                heroMedia.style.transition = 'none';
+            });
+        }
+    }
 
     // =========================================================================
     // 3. REVEAL ON SCROLL INTERRUPTS (IntersectionObserver API)

@@ -482,14 +482,18 @@ section {
     z-index: -1;                       /* Send background behind copy */
 }
 
-/* Procedural tech gradient */
+/* Procedural tech gradient & generated image asset */
 .hero-media-placeholder {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, #050507 0%, #0d0f15 50%, #050507 100%);
+    background-image: url('../assets/images/cinematic_hero_bg.png');
+    background-size: cover;
+    background-position: center 30%;
+    background-repeat: no-repeat;
+    transform: scale(1.05); /* Slight scale to prevent edge gaps with parallax */
 }
 
 /* Sci-Fi Grid Overlay (Pure CSS, hardware-accelerated) */
@@ -500,11 +504,17 @@ section {
     width: 100%;
     height: 100%;
     background-image: 
-        linear-gradient(rgba(0, 240, 255, 0.015) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 240, 255, 0.015) 1px, transparent 1px);
+        linear-gradient(rgba(0, 240, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 240, 255, 0.02) 1px, transparent 1px);
     background-size: 60px 60px;
     background-position: center top;
-    opacity: 0.8;
+    opacity: 0.6;
+    animation: grid-glow-breath 8s infinite alternate ease-in-out;
+}
+
+@keyframes grid-glow-breath {
+    0% { opacity: 0.4; }
+    100% { opacity: 0.75; }
 }
 
 /* Radial Glow simulating an energy core */
@@ -514,22 +524,63 @@ section {
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle at 50% 45%, rgba(0, 240, 255, 0.08) 0%, transparent 60%);
+    background: radial-gradient(circle at 50% 45%, rgba(0, 240, 255, 0.18) 0%, transparent 60%);
+    mix-blend-mode: color-dodge;
 }
 
-/* Bottom Dark Fade (Transitions seamlessly to next section) */
+/* Bottom Dark Fade and overlay dims */
 .hero-overlay-dark {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to bottom, transparent 40%, var(--color-bg-base) 100%);
+    background: linear-gradient(180deg, rgba(5, 5, 7, 0.75) 0%, rgba(5, 5, 7, 0.5) 50%, var(--color-bg-base) 98%);
+}
+
+/* Floating Particle Overlay */
+.hero-particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.particle {
+    position: absolute;
+    background-color: var(--color-accent);
+    border-radius: 50%;
+    opacity: 0;
+    box-shadow: 0 0 10px var(--color-accent);
+    pointer-events: none;
+}
+
+.p-1 { width: 3px; height: 3px; left: 15%; top: 60%; animation: particle-float-up-left 12s infinite linear; }
+.p-2 { width: 2px; height: 2px; left: 35%; top: 75%; animation: particle-float-up-right 16s infinite linear; }
+.p-3 { width: 4px; height: 4px; left: 75%; top: 50%; animation: particle-float-up-left 14s infinite linear; }
+.p-4 { width: 2px; height: 2px; left: 55%; top: 40%; animation: particle-float-up-right 18s infinite linear; }
+.p-5 { width: 3px; height: 3px; left: 85%; top: 80%; animation: particle-float-up-left 15s infinite linear; }
+
+@keyframes particle-float-up-left {
+    0% { transform: translateY(100px) translateX(0); opacity: 0; }
+    20% { opacity: 0.6; }
+    80% { opacity: 0.6; }
+    100% { transform: translateY(-300px) translateX(-50px); opacity: 0; }
+}
+
+@keyframes particle-float-up-right {
+    0% { transform: translateY(100px) translateX(0); opacity: 0; }
+    20% { opacity: 0.6; }
+    80% { opacity: 0.6; }
+    100% { transform: translateY(-300px) translateX(50px); opacity: 0; }
 }
 
 /* Hero Content alignment wrapper */
 .hero-content {
-    max-width: 900px;
+    max-width: 1000px;
     margin: 0 auto;
     text-align: center;
     padding: var(--spacing-6);
@@ -541,48 +592,72 @@ section {
 
 .hero-pretitle {
     font-family: var(--font-mono);
-    color: var(--color-accent);
-    font-size: var(--font-size-sm);
-    letter-spacing: 0.25em;
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-xs);
+    letter-spacing: 0.15em;
     text-transform: uppercase;
-    margin-bottom: var(--spacing-4);
+    margin-bottom: var(--spacing-6);
+    padding: var(--spacing-2) var(--spacing-4);
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 100px;
+    display: inline-block;
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.05);
     animation: fade-slide-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 /* Advanced Title Stack */
 .hero-title {
     margin-bottom: var(--spacing-6);
-    line-height: 1.1;
+    line-height: 1.05;
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-2);
+    align-items: center;
+    gap: var(--spacing-1);
 }
 
 .company-brand-name {
-    font-size: clamp(1.5rem, 5vw, var(--font-size-2xl));
-    font-weight: var(--font-weight-medium);
-    letter-spacing: 0.1em;
-    color: var(--color-text-secondary);
-    animation: fade-slide-up 1s cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-
-.company-tagline {
-    font-size: clamp(2.5rem, 8vw, var(--font-size-5xl));
-    font-weight: var(--font-weight-bold);
+    font-size: clamp(2.8rem, 7.5vw, 5.8rem);
+    font-weight: 800;
     letter-spacing: -0.02em;
     background: linear-gradient(180deg, var(--color-text-primary) 30%, #a1a1aa 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    animation: fade-slide-up 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.company-tagline {
+    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    text-shadow: 0 0 12px rgba(0, 240, 255, 0.35);
+    margin-top: var(--spacing-3);
     animation: fade-slide-up 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .hero-description {
     font-size: var(--font-size-lg);
     color: var(--color-text-secondary);
-    max-width: 680px;
+    max-width: 820px;
     margin: 0 auto var(--spacing-8) auto;
-    line-height: 1.6;
+    line-height: 1.65;
     animation: fade-slide-up 1.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.highlight-accent {
+    color: var(--color-accent);
+    font-weight: var(--font-weight-semibold);
+    text-shadow: 0 0 8px rgba(0, 240, 255, 0.15);
+    transition: text-shadow var(--transition-fast), color var(--transition-fast);
+}
+
+.highlight-accent:hover {
+    color: #ffffff;
+    text-shadow: 0 0 15px rgba(0, 240, 255, 0.8);
 }
 
 .hero-actions {
