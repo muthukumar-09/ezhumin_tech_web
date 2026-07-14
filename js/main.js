@@ -423,6 +423,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const loginEmail = document.getElementById('login-email');
     const loginPassword = document.getElementById('login-password');
     const loginErrorAlert = document.getElementById('login-error-alert');
+    const loginSuccessAlert = document.getElementById('login-success-alert');
+    const btnLoginSubmit = document.getElementById('btn-login-submit');
+    const btnToggleAuth = document.getElementById('btn-toggle-auth');
+    const toggleText = document.getElementById('toggle-text');
+    const loginTitle = document.getElementById('login-title');
+    const loginSubtitle = document.getElementById('login-subtitle');
+    
     const userEmailBadge = document.getElementById('admin-user-email');
     const btnAdminLogout = document.getElementById('btn-admin-logout');
     
@@ -441,6 +448,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let activeFolder = "Company Policies";
     let activeUser = null;
     let adminHomeScrollPosition = 0;
+    let authMode = "signin"; // "signin" or "signup"
 
     // --- View Navigation Controllers ---
     const showAdminPortal = () => {
@@ -458,11 +466,44 @@ document.addEventListener('DOMContentLoaded', () => {
             top: adminHomeScrollPosition,
             behavior: 'instant'
         });
-        // Clear login alerts
-        if (loginErrorAlert) {
-            loginErrorAlert.style.display = 'none';
-        }
+        // Clear login alerts and reset form
+        if (loginErrorAlert) loginErrorAlert.style.display = 'none';
+        if (loginSuccessAlert) loginSuccessAlert.style.display = 'none';
+        if (loginForm) loginForm.reset();
+        
+        // Reset auth mode back to signin
+        authMode = "signin";
+        if (loginTitle) loginTitle.textContent = "Admin Sign In";
+        if (loginSubtitle) loginSubtitle.textContent = "Sign in to manage company files and datasheets";
+        if (btnLoginSubmit) btnLoginSubmit.textContent = "Sign In";
+        if (toggleText) toggleText.textContent = "Don't have an account?";
+        if (btnToggleAuth) btnToggleAuth.textContent = "Sign Up";
     };
+
+    // Toggle between Sign In and Sign Up modes
+    if (btnToggleAuth) {
+        btnToggleAuth.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (loginErrorAlert) loginErrorAlert.style.display = 'none';
+            if (loginSuccessAlert) loginSuccessAlert.style.display = 'none';
+            
+            if (authMode === "signin") {
+                authMode = "signup";
+                loginTitle.textContent = "Admin Sign Up";
+                loginSubtitle.textContent = "Create your admin account credentials";
+                btnLoginSubmit.textContent = "Create Account";
+                toggleText.textContent = "Already have an account?";
+                btnToggleAuth.textContent = "Sign In";
+            } else {
+                authMode = "signin";
+                loginTitle.textContent = "Admin Sign In";
+                loginSubtitle.textContent = "Sign in to manage company files and datasheets";
+                btnLoginSubmit.textContent = "Sign In";
+                toggleText.textContent = "Don't have an account?";
+                btnToggleAuth.textContent = "Sign Up";
+            }
+        });
+    }
 
     // Bind link clicks
     adminPortalLinks.forEach(link => {
@@ -545,28 +586,73 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             const email = loginEmail.value.trim();
             const password = loginPassword.value;
-            loginErrorAlert.style.display = 'none';
+            if (loginErrorAlert) loginErrorAlert.style.display = 'none';
+            if (loginSuccessAlert) loginSuccessAlert.style.display = 'none';
 
             if (isSimulationMode) {
-                // Simulation login: Accept email and check password against simulated key
-                if (password === "admin123") {
-                    sessionStorage.setItem('mock_admin_session', email);
-                    loginForm.reset();
-                    checkAuthState();
+                // Mock Database for registered users in Simulation Mode
+                let registeredUsers = JSON.parse(localStorage.getItem('mock_registered_users')) || {};
+                
+                if (authMode === "signup") {
+                    // Registration sequence (Simulation Mode)
+                    if (registeredUsers[email]) {
+                        loginErrorAlert.textContent = "Error: Email is already registered!";
+                        loginErrorAlert.style.display = 'block';
+                    } else if (password.length < 6) {
+                        loginErrorAlert.textContent = "Error: Password must be at least 6 characters!";
+                        loginErrorAlert.style.display = 'block';
+                    } else {
+                        // Store credential
+                        registeredUsers[email] = password;
+                        localStorage.setItem('mock_registered_users', JSON.stringify(registeredUsers));
+                        
+                        loginSuccessAlert.textContent = "Account created successfully! Switching to login...";
+                        loginSuccessAlert.style.display = 'block';
+                        
+                        // Switch to login form
+                        setTimeout(() => {
+                            btnToggleAuth.click();
+                            loginEmail.value = email;
+                            loginPassword.value = "";
+                        }, 1500);
+                    }
                 } else {
-                    loginErrorAlert.textContent = "Incorrect password! In Simulation Mode, use: admin123";
-                    loginErrorAlert.style.display = 'block';
+                    // Sign-in sequence (Simulation Mode)
+                    const matchesDefault = (email === "admin@ezhumin.com" && password === "admin123");
+                    const matchesRegistered = (registeredUsers[email] === password);
+                    
+                    if (matchesDefault || matchesRegistered) {
+                        sessionStorage.setItem('mock_admin_session', email);
+                        loginForm.reset();
+                        checkAuthState();
+                    } else {
+                        loginErrorAlert.textContent = "Invalid credentials! Use default password (admin123) or sign up for a new account.";
+                        loginErrorAlert.style.display = 'block';
+                    }
                 }
             } else {
-                // Real Firebase sign in
-                auth.signInWithEmailAndPassword(email, password)
-                    .then(() => {
-                        loginForm.reset();
-                    })
-                    .catch(err => {
-                        loginErrorAlert.textContent = err.message;
-                        loginErrorAlert.style.display = 'block';
-                    });
+                // Real Firebase Authentication
+                if (authMode === "signup") {
+                    auth.createUserWithEmailAndPassword(email, password)
+                        .then(() => {
+                            loginSuccessAlert.textContent = "Account created successfully!";
+                            loginSuccessAlert.style.display = 'block';
+                            loginForm.reset();
+                        })
+                        .catch(err => {
+                            loginErrorAlert.textContent = err.message;
+                            loginErrorAlert.style.display = 'block';
+                        });
+                } else {
+                    auth.signInWithEmailAndPassword(email, password)
+                        .then(() => {
+                            loginForm.reset();
+                        })
+                        .catch(err => {
+                            loginErrorAlert.textContent = err.message;
+                            loginErrorAlert.style.display = 'block';
+                        });
+                }
             }
         });
     }

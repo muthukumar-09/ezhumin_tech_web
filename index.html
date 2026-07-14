@@ -45,6 +45,7 @@
                     <li><a href="#technology">Stack</a></li>
                     <li><a href="#roadmap">Roadmap</a></li>
                     <li><a href="#contact">Contact</a></li>
+                    <li><a href="#admin-portal" class="admin-portal-link">Sign In / Login</a></li>
                 </ul>
             </nav>
         </div>
@@ -661,7 +662,6 @@
                     <li><a href="#about">About Us</a></li>
                     <li><a href="#why-choose-us">Why Us</a></li>
                     <li><a href="#contact">Contact</a></li>
-                    <li><a href="#admin-portal" class="admin-portal-link">Admin Portal</a></li>
                 </ul>
             </div>
 
@@ -1319,8 +1319,8 @@
         <div id="admin-login-view" class="admin-login-container">
             <div class="login-card">
                 <div class="login-header">
-                    <h2>Admin Portal</h2>
-                    <p>Sign in to manage company files and datasheets</p>
+                    <h2 id="login-title">Admin Sign In</h2>
+                    <p id="login-subtitle">Sign in to manage company files and datasheets</p>
                 </div>
                 
                 <form id="admin-login-form">
@@ -1335,11 +1335,17 @@
                     
                     <!-- Alert message box -->
                     <div id="login-error-alert" class="alert alert-danger" style="display: none;"></div>
+                    <div id="login-success-alert" class="alert alert-success" style="display: none;"></div>
                     
-                    <button type="submit" class="btn btn-primary btn-large login-submit-btn">
+                    <button type="submit" id="btn-login-submit" class="btn btn-primary btn-large login-submit-btn">
                         Sign In
                     </button>
                 </form>
+
+                <div class="auth-toggle-wrapper" style="text-align: center; margin-top: var(--spacing-4); font-size: var(--font-size-sm); color: var(--color-text-secondary);">
+                    <span id="toggle-text">Don't have an account?</span> 
+                    <button id="btn-toggle-auth" style="color: var(--color-accent); text-decoration: underline; background: none; border: none; padding: 0; cursor: pointer; font-weight: var(--font-weight-semibold);">Sign Up</button>
+                </div>
             </div>
         </div>
 
