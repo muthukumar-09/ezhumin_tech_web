@@ -285,4 +285,44 @@ document.addEventListener('DOMContentLoaded', () => {
         // Re-calibrates layout width when document has fully rendered
         window.addEventListener('load', updateSlideWidth);
     }
+
+    // =========================================================================
+    // 6. INTERACTIVE CATALOGUE MODAL CONTROLLER
+    // =========================================================================
+    const exploreButtons = document.querySelectorAll('.explore-catalogue-btn');
+    const catalogueModal = document.getElementById('catalogue-modal');
+    const modalClose = catalogueModal ? catalogueModal.querySelector('.modal-close') : null;
+    const modalOverlay = catalogueModal ? catalogueModal.querySelector('.modal-overlay') : null;
+    const pdfViewer = catalogueModal ? catalogueModal.querySelector('.pdf-viewer') : null;
+
+    if (exploreButtons.length > 0 && catalogueModal && pdfViewer) {
+        exploreButtons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                // Load the PDF path dynamically on first click to save resources
+                if (!pdfViewer.src || pdfViewer.src === '') {
+                    pdfViewer.src = 'assets/docs/minova_product_portfolio.pdf';
+                }
+                catalogueModal.classList.add('is-active');
+                catalogueModal.setAttribute('aria-hidden', 'false');
+                document.body.style.overflow = 'hidden'; // Lock background scrolling
+            });
+        });
+
+        const closeModal = () => {
+            catalogueModal.classList.remove('is-active');
+            catalogueModal.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = ''; // Unlock background scrolling
+        };
+
+        if (modalClose) modalClose.addEventListener('click', closeModal);
+        if (modalOverlay) modalOverlay.addEventListener('click', closeModal);
+        
+        // Close on Escape key press
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && catalogueModal.classList.contains('is-active')) {
+                closeModal();
+            }
+        });
+    }
 });

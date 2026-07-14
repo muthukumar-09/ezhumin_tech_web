@@ -1808,3 +1808,138 @@ section {
         font-size: 22px;                   /* Global scale register adjustment (rem bases up by 37.5%) */
     }
 }
+
+/* =========================================================================
+   8. INTERACTIVE CATALOGUE MODAL SYSTEM
+   ========================================================================= */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.35s cubic-bezier(0.25, 1, 0.5, 1), visibility 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.modal.is-active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(5, 5, 7, 0.85);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+}
+
+.modal-container {
+    position: relative;
+    width: 90%;
+    max-width: 1100px;
+    height: 85vh;
+    background-color: var(--color-bg-surface);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--border-radius-lg);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6), 0 0 45px var(--color-accent-dim);
+    display: flex;
+    flex-direction: column;
+    z-index: 2001;
+    transform: scale(0.95);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    overflow: hidden;
+}
+
+.modal.is-active .modal-container {
+    transform: scale(1);
+}
+
+.modal-header {
+    padding: var(--spacing-4) var(--spacing-6);
+    border-bottom: 1px solid var(--color-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(22, 24, 31, 0.8);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+}
+
+.modal-header h3 {
+    font-size: var(--font-size-lg);
+    letter-spacing: -0.01em;
+}
+
+.modal-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-4);
+}
+
+.download-btn {
+    display: inline-flex;
+    align-items: center;
+    padding: var(--spacing-2) var(--spacing-4) !important;
+    font-size: var(--font-size-xs) !important;
+}
+
+.modal-close {
+    font-size: 2.2rem;
+    color: var(--color-text-secondary);
+    transition: color var(--transition-fast), transform var(--transition-fast);
+    line-height: 1;
+    background: transparent;
+    border: none;
+    padding: 0 var(--spacing-2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-close:hover {
+    color: #ff4a4a;
+    transform: scale(1.1);
+}
+
+.modal-body {
+    flex-grow: 1;
+    padding: 0;
+    position: relative;
+    background-color: #101115;
+}
+
+.pdf-viewer {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* Mobile optimized overrides */
+@media (max-width: 767px) {
+    .modal-container {
+        height: 90vh;
+        width: 95%;
+    }
+    .modal-header {
+        padding: var(--spacing-3) var(--spacing-4);
+    }
+    .download-text {
+        display: none; /* Hide text on mobile for space */
+    }
+    .download-btn {
+        padding: var(--spacing-2) !important;
+    }
+    .download-btn svg {
+        margin-right: 0 !important;
+    }
+}
