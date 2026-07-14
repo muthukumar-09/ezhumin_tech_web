@@ -287,42 +287,88 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // =========================================================================
-    // 6. INTERACTIVE CATALOGUE MODAL CONTROLLER
+    // 6. INTERACTIVE CATALOGUE SPA VIEW CONTROLLER
     // =========================================================================
     const exploreButtons = document.querySelectorAll('.explore-catalogue-btn');
-    const catalogueModal = document.getElementById('catalogue-modal');
-    const modalClose = catalogueModal ? catalogueModal.querySelector('.modal-close') : null;
-    const modalOverlay = catalogueModal ? catalogueModal.querySelector('.modal-overlay') : null;
-    const pdfViewer = catalogueModal ? catalogueModal.querySelector('.pdf-viewer') : null;
+    const cataloguePage = document.getElementById('catalogue-page');
+    const btnBackToHome = document.getElementById('btn-back-to-home');
+    const catalogueScroller = document.getElementById('catalogue-scroller');
+    const sidebarLinks = document.querySelectorAll('.sidebar-link');
+    const sheets = document.querySelectorAll('.catalogue-sheet');
 
-    if (exploreButtons.length > 0 && catalogueModal && pdfViewer) {
+    let homeScrollPosition = 0;
+
+    if (exploreButtons.length > 0 && cataloguePage) {
         exploreButtons.forEach(btn => {
             btn.addEventListener('click', (e) => {
                 e.preventDefault();
-                // Load the PDF path dynamically on first click to save resources
-                if (!pdfViewer.src || pdfViewer.src === '') {
-                    pdfViewer.src = 'assets/docs/minova_product_portfolio.pdf';
+                // Cache home scroll position
+                homeScrollPosition = window.scrollY;
+                
+                // Active catalogue view state
+                document.body.classList.add('catalogue-active');
+                
+                // Reset scroll coordinates inside catalogue viewport
+                if (catalogueScroller) {
+                    catalogueScroller.scrollTop = 0;
                 }
-                catalogueModal.classList.add('is-active');
-                catalogueModal.setAttribute('aria-hidden', 'false');
-                document.body.style.overflow = 'hidden'; // Lock background scrolling
+                
+                // Scroll main window to top
+                window.scrollTo(0, 0);
             });
         });
 
-        const closeModal = () => {
-            catalogueModal.classList.remove('is-active');
-            catalogueModal.setAttribute('aria-hidden', 'true');
-            document.body.style.overflow = ''; // Unlock background scrolling
-        };
+        if (btnBackToHome) {
+            btnBackToHome.addEventListener('click', () => {
+                // Remove catalogue active view state
+                document.body.classList.remove('catalogue-active');
+                
+                // Restore original homepage scroll position
+                window.scrollTo({
+                    top: homeScrollPosition,
+                    behavior: 'instant'
+                });
+            });
+        }
 
-        if (modalClose) modalClose.addEventListener('click', closeModal);
-        if (modalOverlay) modalOverlay.addEventListener('click', closeModal);
-        
-        // Close on Escape key press
-        window.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && catalogueModal.classList.contains('is-active')) {
-                closeModal();
-            }
-        });
+        // Sidebar Navigation & Smooth Scrollspy (Desktop View Only)
+        if (catalogueScroller && sidebarLinks.length > 0 && sheets.length > 0) {
+            // Click to navigate
+            sidebarLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetId = link.getAttribute('href');
+                    const targetSheet = document.querySelector(targetId);
+                    if (targetSheet) {
+                        catalogueScroller.scrollTo({
+                            top: targetSheet.offsetTop - 30, // Offset a tiny bit for border breathing room
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Scroll listener for auto link highlighting (Scrollspy)
+            catalogueScroller.addEventListener('scroll', () => {
+                let activeSheetId = '';
+                
+                sheets.forEach(sheet => {
+                    const sheetTop = sheet.offsetTop - catalogueScroller.offsetTop;
+                    // Detect which sheet is currently in view
+                    if (catalogueScroller.scrollTop >= sheetTop - 120) {
+                        activeSheetId = sheet.getAttribute('id');
+                    }
+                });
+
+                if (activeSheetId) {
+                    sidebarLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === `#${activeSheetId}`) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            }, { passive: true });
+        }
     }
 });

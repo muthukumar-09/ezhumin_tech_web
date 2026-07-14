@@ -718,27 +718,599 @@
         </div>
     </footer>
 
-    <!-- Catalogue Modal -->
-    <div id="catalogue-modal" class="modal" aria-hidden="true">
-        <div class="modal-overlay"></div>
-        <div class="modal-container">
-            <div class="modal-header">
-                <h3>MINOVA Product Portfolio</h3>
-                <div class="modal-actions">
-                    <a href="assets/docs/minova_product_portfolio.pdf" download="MINOVA_Product_Portfolio.pdf" class="btn btn-primary download-btn">
-                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: middle; margin-right: 8px;">
-                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4m4-5l5 5 5-5m-5 5V3"/>
-                        </svg>
-                        <span class="download-text">Download Catalogue</span>
-                    </a>
-                    <button class="modal-close" aria-label="Close modal">&times;</button>
-                </div>
+    <!-- Catalogue SPA Section -->
+    <section id="catalogue-page" class="catalogue-viewport" aria-label="Product Catalogue">
+        <!-- Top bar sticky navigation -->
+        <div class="catalogue-navbar">
+            <div class="navbar-left">
+                <button class="btn btn-secondary back-btn" id="btn-back-to-home">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-right: 8px; vertical-align: middle;">
+                        <path d="M15 18l-6-6 6-6"/>
+                    </svg>
+                    Back to Home
+                </button>
             </div>
-            <div class="modal-body">
-                <iframe class="pdf-viewer" title="MINOVA Product Portfolio Catalogue"></iframe>
+            <div class="navbar-center">
+                <h2>MINOVA Technical Portfolio</h2>
+            </div>
+            <div class="navbar-right">
+                <a href="assets/docs/minova_product_portfolio.pdf" download="MINOVA_Product_Portfolio.pdf" class="btn btn-primary download-btn-top">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 8px; vertical-align: middle;">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4m4-5l5 5 5-5m-5 5V3"/>
+                    </svg>
+                    <span class="download-text">Download Official PDF</span>
+                </a>
             </div>
         </div>
-    </div>
+
+        <div class="catalogue-main-layout">
+            <!-- Left Sidebar Navigation (Desktop only) -->
+            <aside class="catalogue-sidebar">
+                <div class="sidebar-header">
+                    <h4>PORTFOLIO PAGES</h4>
+                </div>
+                <nav class="sidebar-nav">
+                    <ul>
+                        <li><a href="#page-title" class="sidebar-link active" data-page="1"><span>01</span> Title Page</a></li>
+                        <li><a href="#page-about" class="sidebar-link" data-page="2"><span>02</span> About Company</a></li>
+                        <li><a href="#page-why" class="sidebar-link" data-page="3"><span>03</span> Why MINOVA</a></li>
+                        <li><a href="#page-categories" class="sidebar-link" data-page="4"><span>04</span> Product Categories</a></li>
+                        <li><a href="#page-l-series" class="sidebar-link" data-page="5"><span>05</span> MINOVA L Series</a></li>
+                        <li><a href="#page-h-series" class="sidebar-link" data-page="6"><span>06</span> MINOVA H Series</a></li>
+                        <li><a href="#page-a-series" class="sidebar-link" data-page="7"><span>07</span> MINOVA A Series</a></li>
+                        <li><a href="#page-c-series" class="sidebar-link" data-page="8"><span>08</span> MINOVA C Series</a></li>
+                        <li><a href="#page-i-series" class="sidebar-link" data-page="9"><span>09</span> MINOVA I Series</a></li>
+                        <li><a href="#page-b-series" class="sidebar-link" data-page="10"><span>10</span> MINOVA B Series</a></li>
+                        <li><a href="#page-platform" class="sidebar-link" data-page="11"><span>11</span> Platform & Support</a></li>
+                    </ul>
+                </nav>
+            </aside>
+
+            <!-- Main document area -->
+            <div class="catalogue-content-area" id="catalogue-scroller">
+                
+                <!-- Page 1: Title -->
+                <div id="page-title" class="catalogue-sheet sheet-title-page">
+                    <div class="sheet-inner">
+                        <span class="sheet-org">EZHUMIN TECHNOLOGIES</span>
+                        <div class="title-main-block">
+                            <h1>MINOVA</h1>
+                            <h2>Product Portfolio</h2>
+                            <p class="title-accent-tag">SMART HYBRID ENERGY SYSTEMS</p>
+                        </div>
+                        <div class="sheet-footer-bar">
+                            <p>OFFICIAL TECHNICAL PORTFOLIO • EZHUMIN TECHNOLOGIES • GLOBAL EDITION</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Page 2: About Company -->
+                <div id="page-about" class="catalogue-sheet">
+                    <div class="sheet-inner">
+                        <h2 class="sheet-title-heading">About Company</h2>
+                        <p class="sheet-intro-paragraph">
+                            EZHUMIN TECHNOLOGIES is an advanced clean-technology pioneer specializing in next-generation hybrid renewable energy infrastructure. Engineered to address the compounding inefficiencies of standalone renewable sources, our core engineering ethos converges solar PV, micro-wind kinetics, utility-grade energy storage, and proprietary AI-driven optimization matrices.
+                        </p>
+                        <div class="sheet-grid-2">
+                            <div class="sheet-info-card">
+                                <h3>VISION</h3>
+                                <p>To architect the foundational framework for decentralized global energy self-sufficiency, displacing conventional baseload assets with smart, non-intermittent hybrid technologies.</p>
+                            </div>
+                            <div class="sheet-info-card">
+                                <h3>CORE VALUES</h3>
+                                <p>Uncompromising engineering integrity, structural longevity, grid-interactive resilience, and a steadfast dedication to absolute technological sustainability.</p>
+                            </div>
+                            <div class="sheet-info-card">
+                                <h3>MISSION</h3>
+                                <p>To engineer, manufacture, and scale high-performance multi-source renewable microgrids that deliver resilient, continuous, and economically optimized power to all sectors.</p>
+                            </div>
+                            <div class="sheet-info-card">
+                                <h3>MADE IN INDIA, FOR THE WORLD</h3>
+                                <p>Proudly researched, developed, and precision manufactured within India. Our architecture conforms strictly to international IEC and IEEE compliance baselines, serving as a future-proof global brand.</p>
+                            </div>
+                        </div>
+                        <div class="sheet-sub-vectors">
+                            <h3>CORE TECHNOLOGY VECTORS</h3>
+                            <div class="sheet-grid-2">
+                                <div class="vector-item">
+                                    <h4>AI-Powered Energy Systems</h4>
+                                    <p>Standard setups suffer from intermittent production. MINOVA uses dynamic logic arrays to analyze weather, cycle health, and load draw, predicting and routing currents automatically to achieve zero-drop operations.</p>
+                                </div>
+                                <div class="vector-item">
+                                    <h4>Sustainable Lifecycles</h4>
+                                    <p>From non-toxic LFP battery configurations to high-recyclability turbine composites, every structural layer is chosen to maximize operating life and minimize net carbon debt.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Page 3: Why MINOVA -->
+                <div id="page-why" class="catalogue-sheet">
+                    <div class="sheet-inner">
+                        <h2 class="sheet-title-heading">Why MINOVA</h2>
+                        <p class="sheet-intro-paragraph">
+                            Traditional clean energy architectures isolate solar and wind modalities, leading to significant grid vulnerability and multi-hour generation shortfalls. MINOVA redefines infrastructure resilience by consolidating co-located kinetic and photovoltaic generation channels into a unified physical asset.
+                        </p>
+                        <div class="sheet-grid-2 why-grid">
+                            <div class="why-item">
+                                <h4>Solar + Wind Co-Generation</h4>
+                                <p>Captures complementary diurnal cycles. Photovoltaic yields peak mid-day, while aerodynamic kinetic systems leverage high thermal nocturnal winds, guaranteeing a continuous multi-phase generation profile.</p>
+                            </div>
+                            <div class="why-item">
+                                <h4>IoT Monitoring & Diagnostics</h4>
+                                <p>Continuous telemetry reporting utilizing dual-band WiFi and cellular fallback channels, broadcasting detailed sensor array telemetry to our global operation cloud center.</p>
+                            </div>
+                            <div class="why-item">
+                                <h4>Integrated Battery Storage (BESS)</h4>
+                                <p>Utilizes high-density Lithium Iron Phosphate (LiFePO4) chemistries managed by multi-tier active balancers to buffer structural transient spikes and extend runtime safety thresholds.</p>
+                            </div>
+                            <div class="why-item">
+                                <h4>Remote Diagnostics & Control</h4>
+                                <p>Enables OTA code patching, isolated line disconnects, thermal mitigation switches, and programmatic safety override execution without physical service interventions.</p>
+                            </div>
+                            <div class="why-item">
+                                <h4>AI Energy Management Engine</h4>
+                                <p>Executes complex predictive algorithmic dispatching, load shaping, and power-factor leveling to preserve local thermal and physical component lifecycles.</p>
+                            </div>
+                            <div class="why-item">
+                                <h4>Modular & Scalable Architecture</h4>
+                                <p>Hot-swappable structural racking, parallel power control topologies, and standardized mechanical interfaces allow seamless field expansion up to multi-megawatt capacities.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Page 4: Product Categories -->
+                <div id="page-categories" class="catalogue-sheet">
+                    <div class="sheet-inner">
+                        <h2 class="sheet-title-heading">Product Categories</h2>
+                        <p class="sheet-intro-paragraph">
+                            The MINOVA ecosystem encompasses a comprehensive portfolio designed across multiple power tiers to satisfy specific spatial, operational, and financial parameters.
+                        </p>
+                        <div class="sheet-grid-2 cats-grid">
+                            <div class="cat-card">
+                                <h4>MINOVA L Series</h4>
+                                <span class="cat-sub">STREET LIGHTING SYSTEMS</span>
+                                <p>Autonomous hybrid municipal and industrial highway illumination assets featuring integrated generation arrays.</p>
+                            </div>
+                            <div class="cat-card">
+                                <h4>MINOVA H Series</h4>
+                                <span class="cat-sub">RESIDENTIAL SYSTEMS</span>
+                                <p>Premium micro-hybrid configurations optimized for high power quality and residential grid independence.</p>
+                            </div>
+                            <div class="cat-card">
+                                <h4>MINOVA A Series</h4>
+                                <span class="cat-sub">AGRICULTURE SYSTEMS</span>
+                                <p>High-torque off-grid agricultural micro-grids for heavy-duty pumping and continuous field machinery loads.</p>
+                            </div>
+                            <div class="cat-card">
+                                <h4>MINOVA C Series</h4>
+                                <span class="cat-sub">COMMERCIAL SYSTEMS</span>
+                                <p>Mid-tier commercial power architectures engineered for peak-shaving and facility carbon minimization.</p>
+                            </div>
+                            <div class="cat-card">
+                                <h4>MINOVA I Series</h4>
+                                <span class="cat-sub">INDUSTRIAL SYSTEMS</span>
+                                <p>Heavy multi-megawatt industrial micro-grids featuring rigorous sub-millisecond switching dynamics.</p>
+                            </div>
+                            <div class="cat-card">
+                                <h4>MINOVA B Series</h4>
+                                <span class="cat-sub">BATTERY STORAGE</span>
+                                <p>Scalable LiFePO4 rack enclosures with advanced liquid cooling and multi-point battery protection circuits.</p>
+                            </div>
+                            <div class="cat-card">
+                                <h4>MINOVA Core</h4>
+                                <span class="cat-sub">ENERGY MANAGEMENT CONTROLLER</span>
+                                <p>The central computational hardware executing multi-source MPPT algorithms and local automation rules.</p>
+                            </div>
+                            <div class="cat-card">
+                                <h4>MINOVA Connect</h4>
+                                <span class="cat-sub">MOBILE APPLICATION & CLOUD</span>
+                                <p>Real-time interaction matrix providing enterprise asset tracking, diagnostic alerts, and performance metrics.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Page 5: MINOVA L Series -->
+                <div id="page-l-series" class="catalogue-sheet">
+                    <div class="sheet-inner">
+                        <h2 class="sheet-title-heading">MINOVA L Series | Street Lighting</h2>
+                        <p class="sheet-intro-paragraph">
+                            Completely autonomous, rugged municipal infrastructure illumination platforms. Combining localized vertical aerodynamic micro-turbines and high-efficiency bifacial monocrystalline solar cells to guarantee operational performance across adverse climatic conditions.
+                        </p>
+                        <div class="sheet-table-wrapper">
+                            <table class="specs-table">
+                                <thead>
+                                    <tr>
+                                        <th>MODEL</th>
+                                        <th>LUMENS / POWER</th>
+                                        <th>BATTERY</th>
+                                        <th>APPLICATION VECTOR</th>
+                                        <th>ENGINEERING FEATURES</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>MINOVA L50</strong></td>
+                                        <td>6,500 lm / 50W</td>
+                                        <td>400 Wh LiFePO4</td>
+                                        <td>Urban Footpaths / Parks</td>
+                                        <td>PIR motion profiling, compact profile</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>MINOVA L100</strong></td>
+                                        <td>13,000 lm / 100W</td>
+                                        <td>800 Wh LiFePO4</td>
+                                        <td>Collector Roads / Residential</td>
+                                        <td>Dual-axis mounting, low wind cut-in</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>MINOVA L150</strong></td>
+                                        <td>19,500 lm / 150W</td>
+                                        <td>1,200 Wh LiFePO4</td>
+                                        <td>Arterial Roadways</td>
+                                        <td>Bifacial tracking, marine alloy</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>MINOVA L200</strong></td>
+                                        <td>26,000 lm / 200W</td>
+                                        <td>1,600 Wh LiFePO4</td>
+                                        <td>Highways / Expressways</td>
+                                        <td>Wind fairings, real-time node telemetry</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>MINOVA L300</strong></td>
+                                        <td>39,000 lm / 300W</td>
+                                        <td>2,400 Wh LiFePO4</td>
+                                        <td>Industrial Logistics Yards</td>
+                                        <td>Dual-luminaire, high-altitude rating</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Page 6: MINOVA H Series -->
+                <div id="page-h-series" class="catalogue-sheet">
+                    <div class="sheet-inner">
+                        <h2 class="sheet-title-heading">MINOVA H Series | Residential</h2>
+                        <p class="sheet-intro-paragraph">
+                            Premium grid-interactive and off-grid micro-hybrid generation centers. Engineered to isolate residential consumers from frequent brownouts, high tariff escalations, and power quality anomalies through sub-millisecond line switching capabilities.
+                        </p>
+                        <div class="sheet-table-wrapper">
+                            <table class="specs-table">
+                                <thead>
+                                    <tr>
+                                        <th>MODEL</th>
+                                        <th>SOLAR ARRAY CAP</th>
+                                        <th>WIND TURBINE</th>
+                                        <th>DAILY AVG YIELD</th>
+                                        <th>BESS STORAGE OPTION</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>MINOVA H2</strong></td>
+                                        <td>2.0 kWp</td>
+                                        <td>0.5 kW Vertical Axis</td>
+                                        <td>10 - 12 kWh</td>
+                                        <td>5.0 kWh Modular Rack</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>MINOVA H3</strong></td>
+                                        <td>3.0 kWp</td>
+                                        <td>1.0 kW Vertical Axis</td>
+                                        <td>16 - 20 kWh</td>
+                                        <td>5.0 / 10.0 kWh Expandable</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>MINOVA H5</strong></td>
+                                        <td>5.0 kWp</td>
+                                        <td>1.5 kW Horizontal Axis</td>
+                                        <td>28 - 34 kWh</td>
+                                        <td>10.0 kWh High Output</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>MINOVA H7</strong></td>
+                                        <td>7.5 kWp</td>
+                                        <td>2.0 kW Horizontal Axis</td>
+                                        <td>42 - 50 kWh</td>
+                                        <td>15.0 kWh High Output</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>MINOVA H10</strong></td>
+                                        <td>10.0 kWp</td>
+                                        <td>3.0 kW Dual Turbines</td>
+                                        <td>58 - 70 kWh</td>
+                                        <td>20.0 kWh Enterprise Base</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Page 7: MINOVA A Series -->
+                <div id="page-a-series" class="catalogue-sheet">
+                    <div class="sheet-inner">
+                        <h2 class="sheet-title-heading">MINOVA A Series | Agriculture</h2>
+                        <p class="sheet-intro-paragraph">
+                            Built for harsh agricultural conditions and high transient starting currents. Optimized for heavy-duty multi-phase agricultural water pumps, automated micro-irrigation processing, and rural off-grid operations.
+                        </p>
+                        <div class="sheet-table-wrapper">
+                            <table class="specs-table">
+                                <thead>
+                                    <tr>
+                                        <th>MODEL</th>
+                                        <th>PUMP POWER RATING</th>
+                                        <th>HYBRID GEN CAPACITY</th>
+                                        <th>DAILY WATER OUTPUT (100M HEAD)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>MINOVA A3</strong></td>
+                                        <td>3.0 HP Pumps</td>
+                                        <td>4.5 kW Combined</td>
+                                        <td>Up to 45,000 Liters / Day</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>MINOVA A5</strong></td>
+                                        <td>5.0 HP Pumps</td>
+                                        <td>7.5 kW Combined</td>
+                                        <td>Up to 75,000 Liters / Day</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>MINOVA A10</strong></td>
+                                        <td>10.0 HP Pumps</td>
+                                        <td>15.0 kW Combined</td>
+                                        <td>Up to 160,000 Liters / Day</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>MINOVA A20</strong></td>
+                                        <td>20.0 HP Pumps</td>
+                                        <td>30.0 kW Combined</td>
+                                        <td>Up to 330,000 Liters / Day</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Page 8: MINOVA C Series -->
+                <div id="page-c-series" class="catalogue-sheet">
+                    <div class="sheet-inner">
+                        <h2 class="sheet-title-heading">MINOVA C Series | Commercial</h2>
+                        <p class="sheet-intro-paragraph">
+                            Designed for corporate campuses, office parks, and commercial operations. Engineered for seamless peak-tariff mitigation, demand-charge reduction, and automated power factor correction.
+                        </p>
+                        <div class="sheet-table-wrapper">
+                            <table class="specs-table">
+                                <thead>
+                                    <tr>
+                                        <th>MODEL</th>
+                                        <th>INVERTER RATING</th>
+                                        <th>SOLAR CONFIG</th>
+                                        <th>WIND KINETIC MATRIX</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>MINOVA C10</strong></td>
+                                        <td>10 kW Multi-Phase</td>
+                                        <td>12 kWp Monocrystalline</td>
+                                        <td>3 kW Aerodynamic Wind Array</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>MINOVA C20</strong></td>
+                                        <td>20 kW Multi-Phase</td>
+                                        <td>25 kWp Monocrystalline</td>
+                                        <td>5 kW Aerodynamic Wind Array</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>MINOVA C30</strong></td>
+                                        <td>30 kW Multi-Phase</td>
+                                        <td>35 kWp Monocrystalline</td>
+                                        <td>10 kW Aerodynamic Wind Array</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>MINOVA C50</strong></td>
+                                        <td>50 kW Multi-Phase</td>
+                                        <td>60 kWp High Efficiency</td>
+                                        <td>15 kW Aerodynamic Wind Array</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Page 9: MINOVA I Series -->
+                <div id="page-i-series" class="catalogue-sheet">
+                    <div class="sheet-inner">
+                        <h2 class="sheet-title-heading">MINOVA I Series | Industrial</h2>
+                        <p class="sheet-intro-paragraph">
+                            High-capacity, heavy-duty microgrid installations engineered specifically for automated production environments, heavy manufacturing facilities, and localized grid reinforcement configurations.
+                        </p>
+                        <div class="sheet-table-wrapper">
+                            <table class="specs-table">
+                                <thead>
+                                    <tr>
+                                        <th>MODEL</th>
+                                        <th>AC OUTPUT</th>
+                                        <th>SOLAR PV MAX</th>
+                                        <th>WIND TURBINE</th>
+                                        <th>ENCLOSURE ARCHITECTURE</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>MINOVA I25</strong></td>
+                                        <td>25 kW</td>
+                                        <td>30 kWp</td>
+                                        <td>10 kW Turbine</td>
+                                        <td>NEMA 4X Multi-Cabinet</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>MINOVA I50</strong></td>
+                                        <td>50 kW</td>
+                                        <td>60 kWp</td>
+                                        <td>20 kW Turbine</td>
+                                        <td>NEMA 4X Multi-Cabinet</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>MINOVA I100</strong></td>
+                                        <td>100 kW</td>
+                                        <td>120 kWp</td>
+                                        <td>40 kW Multi-Turbine</td>
+                                        <td>IP65 Thermal Enclosure</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>MINOVA I250</strong></td>
+                                        <td>250 kW</td>
+                                        <td>300 kWp</td>
+                                        <td>100 kW Multi-Turbine</td>
+                                        <td>10ft ISO Climate Container</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>MINOVA I500</strong></td>
+                                        <td>500 kW</td>
+                                        <td>600 kWp</td>
+                                        <td>200 kW Multi-Turbine</td>
+                                        <td>20ft ISO Climate Container</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>MINOVA I1000</strong></td>
+                                        <td>1000 kW (1 MW)</td>
+                                        <td>1200 kWp</td>
+                                        <td>400 kW Multi-Turbine</td>
+                                        <td>40ft ISO Climate Container</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Page 10: MINOVA B Series -->
+                <div id="page-b-series" class="catalogue-sheet">
+                    <div class="sheet-inner">
+                        <h2 class="sheet-title-heading">MINOVA B Series | Battery Storage</h2>
+                        <p class="sheet-intro-paragraph">
+                            Utility-grade Lithium Iron Phosphate (LiFePO4) Battery Energy Storage Systems (BESS). Equipped with sub-millisecond multi-point voltage telemetry, integrated active balancing circuitry, and multi-stage fire mitigation technologies.
+                        </p>
+                        <div class="sheet-table-wrapper">
+                            <table class="specs-table">
+                                <thead>
+                                    <tr>
+                                        <th>MODEL</th>
+                                        <th>NOMINAL CAPACITY</th>
+                                        <th>CELL CHEMISTRY</th>
+                                        <th>VOLTAGE PROFILE</th>
+                                        <th>THERMAL CONTROL MATRIX</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>MINOVA B5</strong></td>
+                                        <td>5.12 kWh</td>
+                                        <td>LiFePO4 (LFP)</td>
+                                        <td>51.2 VDC</td>
+                                        <td>Passive Extruded Aluminum</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>MINOVA B10</strong></td>
+                                        <td>10.24 kWh</td>
+                                        <td>LiFePO4 (LFP)</td>
+                                        <td>51.2 VDC</td>
+                                        <td>Forced Convection Fan Array</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>MINOVA B15</strong></td>
+                                        <td>15.36 kWh</td>
+                                        <td>LiFePO4 (LFP)</td>
+                                        <td>102.4 VDC</td>
+                                        <td>Forced Convection Fan Array</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>MINOVA B20</strong></td>
+                                        <td>20.48 kWh</td>
+                                        <td>LiFePO4 (LFP)</td>
+                                        <td>204.8 VDC</td>
+                                        <td>Active Solid-State Refrigeration</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>MINOVA B50</strong></td>
+                                        <td>51.20 kWh</td>
+                                        <td>LiFePO4 (LFP)</td>
+                                        <td>409.6 VDC</td>
+                                        <td>Liquid-Glycol Circulation Loops</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Page 11: Platform Architecture & Support -->
+                <div id="page-platform" class="catalogue-sheet sheet-end-page">
+                    <div class="sheet-inner">
+                        <h2 class="sheet-title-heading">Smart Platform Architecture</h2>
+                        <p class="sheet-intro-paragraph">
+                            The MINOVA ecosystem is coordinated by a powerful multi-tier automation layer that balances power conversion efficiency with cloud diagnostics.
+                        </p>
+                        <div class="sheet-grid-3">
+                            <div class="platform-card">
+                                <h4>MINOVA CORE</h4>
+                                <p>Edge hardware controller with dual-core processors executing multi-source MPPT tracking algorithms at 20kHz.</p>
+                            </div>
+                            <div class="platform-card">
+                                <h4>MINOVA EDGE</h4>
+                                <p>Locally deployed software stack executing high-speed islanding protection and sub-ms line switching.</p>
+                            </div>
+                            <div class="platform-card">
+                                <h4>MINOVA CONNECT</h4>
+                                <p>Mobile app offering real-time asset tracking, diagnostics, and charge parameters.</p>
+                            </div>
+                        </div>
+
+                        <div class="support-box">
+                            <h3>Global Contact & Support</h3>
+                            <div class="sheet-grid-2">
+                                <div class="support-detail">
+                                    <p><strong>Corporate:</strong> EZHUMIN TECHNOLOGIES</p>
+                                    <p><strong>Brand:</strong> MINOVA Smart Hybrid Systems</p>
+                                    <p><strong>Web:</strong> ezhumin.com / minova-energy.com</p>
+                                </div>
+                                <div class="support-detail">
+                                    <p><strong>Email:</strong> solutions@ezhumin.com</p>
+                                    <p><strong>Phone:</strong> +91 (422) 456-7890 / +91 98765 43210</p>
+                                    <p><strong>HQ Address:</strong> Tech Park Phase II, ELCOT IT Park, Coimbatore, Tamil Nadu 641014</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Big CTA to download PDF -->
+                        <div class="catalogue-bottom-cta">
+                            <h3>Need the offline technical datasheet?</h3>
+                            <p>Download the official high-resolution PDF document representing Ezhumin's global edition MINOVA portfolio.</p>
+                            <a href="assets/docs/minova_product_portfolio.pdf" download="MINOVA_Product_Portfolio.pdf" class="btn btn-primary btn-large">
+                                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 10px; vertical-align: middle;">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4m4-5l5 5 5-5m-5 5V3"/>
+                                </svg>
+                                Download Official Portfolio PDF
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
 
     <!-- Core Application Logic -->
     <script src="js/main.js"></script>
