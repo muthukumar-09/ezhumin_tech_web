@@ -371,4 +371,511 @@ document.addEventListener('DOMContentLoaded', () => {
             }, { passive: true });
         }
     }
+
+    // =========================================================================
+    // 7. SECURE ADMIN PORTAL & FILE STORAGE SYSTEM (Firebase + Sim Mode)
+    // =========================================================================
+    
+    // --- Firebase Web Configuration ---
+    // NOTE: Replace these values with your actual Firebase Web App credentials.
+    const firebaseConfig = {
+        apiKey: "YOUR_API_KEY_HERE",
+        authDomain: "YOUR_PROJECT_ID_HERE.firebaseapp.com",
+        projectId: "YOUR_PROJECT_ID_HERE",
+        storageBucket: "YOUR_PROJECT_ID_HERE.appspot.com",
+        messagingSenderId: "YOUR_SENDER_ID_HERE",
+        appId: "YOUR_APP_ID_HERE"
+    };
+
+    // Auto-detect if Firebase has been configured
+    const isFirebaseConfigured = 
+        firebaseConfig.apiKey && 
+        !firebaseConfig.apiKey.startsWith("YOUR_") && 
+        firebaseConfig.projectId && 
+        !firebaseConfig.projectId.startsWith("YOUR_");
+
+    let auth = null;
+    let storage = null;
+    let isSimulationMode = !isFirebaseConfigured;
+
+    if (isFirebaseConfigured) {
+        try {
+            // Initialize Firebase App
+            firebase.initializeApp(firebaseConfig);
+            auth = firebase.auth();
+            storage = firebase.storage();
+            console.log("Firebase storage and auth initialized successfully.");
+        } catch (err) {
+            console.error("Firebase init failed, switching to Simulation Mode:", err);
+            isSimulationMode = true;
+        }
+    } else {
+        console.warn("Firebase not configured. Running Admin Portal in Simulation Mode.");
+    }
+
+    // --- DOM Elements Reference ---
+    const adminPortalLinks = document.querySelectorAll('.admin-portal-link');
+    const adminPage = document.getElementById('admin-page');
+    const btnAdminBackToHome = document.getElementById('btn-admin-back-to-home');
+    const loginView = document.getElementById('admin-login-view');
+    const dashboardView = document.getElementById('admin-dashboard-view');
+    const loginForm = document.getElementById('admin-login-form');
+    const loginEmail = document.getElementById('login-email');
+    const loginPassword = document.getElementById('login-password');
+    const loginErrorAlert = document.getElementById('login-error-alert');
+    const userEmailBadge = document.getElementById('admin-user-email');
+    const btnAdminLogout = document.getElementById('btn-admin-logout');
+    
+    const folderList = document.getElementById('folder-list');
+    const folderButtons = document.querySelectorAll('.folder-link');
+    const currentFolderTitle = document.getElementById('current-folder-title');
+    const fileTableBody = document.getElementById('file-table-body');
+    const dashboardAlert = document.getElementById('dashboard-alert');
+    
+    const uploadDropzone = document.getElementById('upload-dropzone');
+    const fileUploader = document.getElementById('file-uploader');
+    const progressContainer = document.getElementById('progress-container');
+    const progressBarFill = document.getElementById('progress-bar-fill');
+    const progressText = document.getElementById('progress-text');
+    
+    let activeFolder = "Company Policies";
+    let activeUser = null;
+    let adminHomeScrollPosition = 0;
+
+    // --- View Navigation Controllers ---
+    const showAdminPortal = () => {
+        adminHomeScrollPosition = window.scrollY;
+        document.body.classList.add('admin-active');
+        window.scrollTo(0, 0);
+        
+        // Auto-check authentication state
+        checkAuthState();
+    };
+
+    const hideAdminPortal = () => {
+        document.body.classList.remove('admin-active');
+        window.scrollTo({
+            top: adminHomeScrollPosition,
+            behavior: 'instant'
+        });
+        // Clear login alerts
+        if (loginErrorAlert) {
+            loginErrorAlert.style.display = 'none';
+        }
+    };
+
+    // Bind link clicks
+    adminPortalLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            showAdminPortal();
+        });
+    });
+
+    if (btnAdminBackToHome) {
+        btnAdminBackToHome.addEventListener('click', hideAdminPortal);
+    }
+
+    // --- Mock Storage Engine (Simulation Mode) ---
+    const getMockFiles = () => {
+        const localData = localStorage.getItem('mock_admin_files');
+        if (localData) return JSON.parse(localData);
+        
+        // Default seed data for Simulation mode
+        const seedData = {
+            "Company Policies": [
+                { name: "Ezhumin_HR_Handbook_2026.pdf", date: "2026-05-10", size: "1.2 MB", downloadUrl: "#" },
+                { name: "Operational_Safety_Baseline.pdf", date: "2026-06-15", size: "2.4 MB", downloadUrl: "#" }
+            ],
+            "Technical Datasheets": [
+                { name: "MINOVA_L_Series_Municipal_Blueprint.pdf", date: "2026-07-02", size: "4.8 MB", downloadUrl: "#" },
+                { name: "MINOVA_H_Series_BESS_Wiring.pdf", date: "2026-07-12", size: "3.1 MB", downloadUrl: "#" }
+            ],
+            "Client Presentations": [
+                { name: "GreenEnergy_Industrial_Bid_V2.pdf", date: "2026-04-18", size: "12.4 MB", downloadUrl: "#" }
+            ],
+            "Financial Records": [
+                { name: "Q1_Financial_Forecast_Ezhumin.pdf", date: "2026-04-30", size: "980 KB", downloadUrl: "#" }
+            ]
+        };
+        localStorage.setItem('mock_admin_files', JSON.stringify(seedData));
+        return seedData;
+    };
+
+    const saveMockFiles = (data) => {
+        localStorage.setItem('mock_admin_files', JSON.stringify(data));
+    };
+
+    // --- Authentication Operations ---
+    const checkAuthState = () => {
+        if (isSimulationMode) {
+            // Read active session token
+            const sessionUser = sessionStorage.getItem('mock_admin_session');
+            if (sessionUser) {
+                activeUser = { email: sessionUser };
+                userEmailBadge.textContent = `${activeUser.email} (SIMULATED)`;
+                loginView.style.display = 'none';
+                dashboardView.style.display = 'flex';
+                loadDocuments();
+            } else {
+                activeUser = null;
+                loginView.style.display = 'flex';
+                dashboardView.style.display = 'none';
+            }
+        } else {
+            // Real Firebase state listener
+            auth.onAuthStateChanged(user => {
+                if (user) {
+                    activeUser = user;
+                    userEmailBadge.textContent = user.email;
+                    loginView.style.display = 'none';
+                    dashboardView.style.display = 'flex';
+                    loadDocuments();
+                } else {
+                    activeUser = null;
+                    loginView.style.display = 'flex';
+                    dashboardView.style.display = 'none';
+                }
+            });
+        }
+    };
+
+    if (loginForm) {
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = loginEmail.value.trim();
+            const password = loginPassword.value;
+            loginErrorAlert.style.display = 'none';
+
+            if (isSimulationMode) {
+                // Simulation login: Accept email and check password against simulated key
+                if (password === "admin123") {
+                    sessionStorage.setItem('mock_admin_session', email);
+                    loginForm.reset();
+                    checkAuthState();
+                } else {
+                    loginErrorAlert.textContent = "Incorrect password! In Simulation Mode, use: admin123";
+                    loginErrorAlert.style.display = 'block';
+                }
+            } else {
+                // Real Firebase sign in
+                auth.signInWithEmailAndPassword(email, password)
+                    .then(() => {
+                        loginForm.reset();
+                    })
+                    .catch(err => {
+                        loginErrorAlert.textContent = err.message;
+                        loginErrorAlert.style.display = 'block';
+                    });
+            }
+        });
+    }
+
+    if (btnAdminLogout) {
+        btnAdminLogout.addEventListener('click', () => {
+            if (isSimulationMode) {
+                sessionStorage.removeItem('mock_admin_session');
+                checkAuthState();
+            } else {
+                auth.signOut().catch(err => console.error("Sign out error:", err));
+            }
+        });
+    }
+
+    // --- Directory Navigation ---
+    if (folderList) {
+        folderButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Update active link state
+                folderButtons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                // Update folder state
+                activeFolder = btn.getAttribute('data-folder');
+                currentFolderTitle.textContent = activeFolder;
+                
+                // Reload files
+                loadDocuments();
+            });
+        });
+    }
+
+    // --- Document List Loader ---
+    const loadDocuments = () => {
+        // Clear active list
+        fileTableBody.innerHTML = '';
+        
+        if (isSimulationMode) {
+            const files = getMockFiles()[activeFolder] || [];
+            if (files.length === 0) {
+                fileTableBody.innerHTML = '<tr><td colspan="4" class="empty-files-placeholder">No documents found in this folder.</td></tr>';
+                return;
+            }
+
+            files.forEach((file, index) => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td><strong>${file.name}</strong></td>
+                    <td>${file.date}</td>
+                    <td>${file.size}</td>
+                    <td>
+                        <a href="${file.downloadUrl}" class="action-btn-link" title="Download Document">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4m4-5l5 5 5-5m-5 5V3"/>
+                            </svg>
+                        </a>
+                        <button class="action-btn-link action-btn-delete" data-index="${index}" title="Delete Document">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M19 7l-.867 12.142A2 2 0 0 1 16.138 21H7.862a2 2 0 0 1-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v3M4 7h16"/>
+                            </svg>
+                        </button>
+                    </td>
+                `;
+                fileTableBody.appendChild(tr);
+            });
+
+            // Bind mock delete listeners
+            fileTableBody.querySelectorAll('.action-btn-delete').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const index = parseInt(btn.getAttribute('data-index'), 10);
+                    deleteMockFile(index);
+                });
+            });
+        } else {
+            // Real Firebase list operation
+            const folderRef = storage.ref().child(`admin_portal/${activeFolder}`);
+            fileTableBody.innerHTML = '<tr><td colspan="4" class="empty-files-placeholder">Loading documents from storage...</td></tr>';
+            
+            folderRef.listAll()
+                .then(res => {
+                    if (res.items.length === 0) {
+                        fileTableBody.innerHTML = '<tr><td colspan="4" class="empty-files-placeholder">No documents found in this folder.</td></tr>';
+                        return;
+                    }
+                    
+                    fileTableBody.innerHTML = '';
+                    
+                    const fetchPromises = res.items.map(itemRef => {
+                        // Gather metadata for sizes and dates
+                        const metaPromise = itemRef.getMetadata();
+                        const urlPromise = itemRef.getDownloadURL();
+                        
+                        return Promise.all([metaPromise, urlPromise]).then(([metadata, downloadUrl]) => {
+                            // Convert bytes to readable formats
+                            const sizeInBytes = metadata.size;
+                            let sizeStr = `${(sizeInBytes / 1024).toFixed(1)} KB`;
+                            if (sizeInBytes > 1024 * 1024) {
+                                sizeStr = `${(sizeInBytes / (1024 * 1024)).toFixed(1)} MB`;
+                            }
+                            
+                            // Format date
+                            const dateStr = new Date(metadata.timeCreated).toISOString().split('T')[0];
+                            
+                            return {
+                                name: itemRef.name,
+                                date: dateStr,
+                                size: sizeStr,
+                                downloadUrl: downloadUrl,
+                                fullPath: itemRef.fullPath
+                            };
+                        });
+                    });
+                    
+                    Promise.all(fetchPromises)
+                        .then(files => {
+                            files.forEach(file => {
+                                const tr = document.createElement('tr');
+                                tr.innerHTML = `
+                                    <td><strong>${file.name}</strong></td>
+                                    <td>${file.date}</td>
+                                    <td>${file.size}</td>
+                                    <td>
+                                        <a href="${file.downloadUrl}" target="_blank" rel="noopener noreferrer" class="action-btn-link" title="Download Document">
+                                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4m4-5l5 5 5-5m-5 5V3"/>
+                                            </svg>
+                                        </a>
+                                        <button class="action-btn-link action-btn-delete" data-path="${file.fullPath}" title="Delete Document">
+                                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                                                <path d="M19 7l-.867 12.142A2 2 0 0 1 16.138 21H7.862a2 2 0 0 1-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v3M4 7h16"/>
+                                            </svg>
+                                        </button>
+                                    </td>
+                                `;
+                                fileTableBody.appendChild(tr);
+                            });
+                            
+                            // Bind delete triggers
+                            fileTableBody.querySelectorAll('.action-btn-delete').forEach(btn => {
+                                btn.addEventListener('click', () => {
+                                    const fullPath = btn.getAttribute('data-path');
+                                    deleteRealFile(fullPath);
+                                });
+                            });
+                        })
+                        .catch(err => {
+                            showDashboardAlert("Failed to resolve file details: " + err.message, "danger");
+                        });
+                })
+                .catch(err => {
+                    fileTableBody.innerHTML = '<tr><td colspan="4" class="empty-files-placeholder">Error loading files.</td></tr>';
+                    showDashboardAlert("Folder listing failed: " + err.message, "danger");
+                });
+        }
+    };
+
+    // --- Delete Operations ---
+    const deleteMockFile = (index) => {
+        if (confirm("Are you sure you want to delete this document from simulation?")) {
+            const data = getMockFiles();
+            const folderFiles = data[activeFolder];
+            if (folderFiles && folderFiles[index]) {
+                folderFiles.splice(index, 1);
+                data[activeFolder] = folderFiles;
+                saveMockFiles(data);
+                loadDocuments();
+                showDashboardAlert("Document deleted successfully (Simulated).", "success");
+            }
+        }
+    };
+
+    const deleteRealFile = (fullPath) => {
+        if (confirm("Are you sure you want to delete this document from cloud storage?")) {
+            storage.ref(fullPath).delete()
+                .then(() => {
+                    loadDocuments();
+                    showDashboardAlert("Document deleted successfully from cloud storage.", "success");
+                })
+                .catch(err => {
+                    showDashboardAlert("Delete failed: " + err.message, "danger");
+                });
+        }
+    };
+
+    // --- Upload Handlers ---
+    const triggerUpload = (file) => {
+        if (!file) return;
+        if (file.type !== "application/pdf") {
+            showDashboardAlert("Error: Only PDF documents are allowed.", "danger");
+            return;
+        }
+
+        // Show progress box
+        progressContainer.style.display = 'block';
+        progressBarFill.style.width = '0%';
+        progressText.textContent = 'Uploading: 0%';
+
+        if (isSimulationMode) {
+            // Simulated upload sequence
+            let percentage = 0;
+            const interval = setInterval(() => {
+                percentage += 10;
+                progressBarFill.style.width = `${percentage}%`;
+                progressText.textContent = `Uploading: ${percentage}%`;
+                
+                if (percentage >= 100) {
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        // Complete simulated upload
+                        progressContainer.style.display = 'none';
+                        
+                        const data = getMockFiles();
+                        if (!data[activeFolder]) data[activeFolder] = [];
+                        
+                        // Parse size
+                        let sizeStr = `${(file.size / 1024).toFixed(1)} KB`;
+                        if (file.size > 1024 * 1024) {
+                            sizeStr = `${(file.size / (1024 * 1024)).toFixed(1)} MB`;
+                        }
+                        
+                        // Append details
+                        data[activeFolder].push({
+                            name: file.name,
+                            date: new Date().toISOString().split('T')[0],
+                            size: sizeStr,
+                            downloadUrl: "#"
+                        });
+                        
+                        saveMockFiles(data);
+                        loadDocuments();
+                        showDashboardAlert("Document uploaded successfully (Simulated).", "success");
+                    }, 300);
+                }
+            }, 100);
+        } else {
+            // Real Firebase Storage upload
+            const fileRef = storage.ref().child(`admin_portal/${activeFolder}/${file.name}`);
+            const task = fileRef.put(file);
+            
+            task.on('state_changed', 
+                (snapshot) => {
+                    // Update progress meter
+                    const percentage = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+                    progressBarFill.style.width = `${percentage}%`;
+                    progressText.textContent = `Uploading: ${percentage}%`;
+                }, 
+                (err) => {
+                    progressContainer.style.display = 'none';
+                    showDashboardAlert("Upload failed: " + err.message, "danger");
+                }, 
+                () => {
+                    // Finish upload successfully
+                    progressContainer.style.display = 'none';
+                    loadDocuments();
+                    showDashboardAlert("Document uploaded successfully to cloud storage.", "success");
+                }
+            );
+        }
+    };
+
+    // --- Alert Feedback Messages ---
+    const showDashboardAlert = (msg, type) => {
+        dashboardAlert.textContent = msg;
+        dashboardAlert.className = `alert alert-${type === 'success' ? 'success' : 'danger'}`;
+        dashboardAlert.style.display = 'block';
+        
+        // Auto fade out after 4 seconds
+        setTimeout(() => {
+            dashboardAlert.style.display = 'none';
+        }, 4000);
+    };
+
+    // --- Drag-and-Drop Dropzone Events ---
+    if (uploadDropzone) {
+        // Trigger file input dialog
+        uploadDropzone.addEventListener('click', (e) => {
+            if (e.target.closest('.upload-progress-container')) return; // Avoid dialog click bubbling on progress
+            fileUploader.click();
+        });
+
+        fileUploader.addEventListener('change', () => {
+            if (fileUploader.files.length > 0) {
+                triggerUpload(fileUploader.files[0]);
+            }
+        });
+
+        // Dragover events
+        ['dragenter', 'dragover'].forEach(eventName => {
+            uploadDropzone.addEventListener(eventName, (e) => {
+                e.preventDefault();
+                uploadDropzone.classList.add('dragover');
+            }, false);
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+            uploadDropzone.addEventListener(eventName, (e) => {
+                e.preventDefault();
+                uploadDropzone.classList.remove('dragover');
+            }, false);
+        });
+
+        // Drop file
+        uploadDropzone.addEventListener('drop', (e) => {
+            const dt = e.dataTransfer;
+            const files = dt.files;
+            if (files.length > 0) {
+                triggerUpload(files[0]);
+            }
+        });
+    }
 });
